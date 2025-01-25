@@ -11,6 +11,8 @@ export default {
       fontFamily: {
         inter: ["Inter"]
       },
+      bg_primary: "#333333",
+
       container: {
         center: true,
         padding: "1rem",
