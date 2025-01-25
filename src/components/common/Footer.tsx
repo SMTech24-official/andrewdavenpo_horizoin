@@ -18,7 +18,7 @@ export default function Footer() {
                         <Image src={logo} width={206} height={30} className="w-[206px]" alt="logo" />
                     </Link>
                     <p className="max-w-[864px] text-[#908B8B] pt-[18px] pb-[24px] text-center">
-                        Event Horizon offers educational resources, YouTube course links, a store, and a members-only section with exclusive content while collecting user data for marketing
+                        Event Horizon offers educational resources, YouTube course links,  a store, and a members-only section with exclusive content while collecting user data for marketing
                     </p>
                     <ul className="text-bg_primary text-[18px] flex gap-[48px] justify-center">
                         <li className="cursor-pointer font-[500]">
