@@ -20,20 +20,20 @@ export default function Footer() {
                     <p className="max-w-[864px] text-[#908B8B] pt-[18px] pb-[24px] text-center">
                         Event Horizon offers educational resources, YouTube course links,  a store, and a members-only section with exclusive content while collecting user data for marketing
                     </p>
-                    <ul className="text-bg_primary text-[18px] flex gap-[48px] justify-center">
-                        <li className="cursor-pointer font-[500]">
+                    <ul className="text-bg_primary text-[18px] flex lg:gap-[48px] gap-4 justify-center lg:flex-row flex-col">
+                        <li className="cursor-pointer font-[500] hover:text-[#333333]">
                             <Link href={'/'}>Education</Link>
                         </li>
-                        <li className="cursor-pointer font-[500]">
+                        <li className="cursor-pointer font-[500] hover:text-[#333333]">
                             <Link href={'/'}>Store</Link>
                         </li>
-                        <li className="cursor-pointer font-[500]">
+                        <li className="cursor-pointer font-[500] hover:text-[#333333]">
                             <Link href={'/'}>Member Area</Link>
                         </li>
-                        <li className="cursor-pointer font-[500]">
+                        <li className="cursor-pointer font-[500] hover:text-[#333333]">
                             <Link href={'/'}>Terms</Link>
                         </li>
-                        <li className="cursor-pointer font-[500]">
+                        <li className="cursor-pointer font-[500] hover:text-[#333333]">
                             <Link href={'/'}>Privacy</Link>
                         </li>
                     </ul>

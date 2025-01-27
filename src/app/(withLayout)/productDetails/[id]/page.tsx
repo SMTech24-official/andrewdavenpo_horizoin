@@ -4,6 +4,7 @@ import { useState } from "react"
 import Image from "next/image"
 import orderBook from '@/assets/orderbook.png'
 import { BsCart3 } from "react-icons/bs";
+import Subscribe from "@/app/components/home/Subscribe";
 
 
 export default function ProductPage() {
@@ -111,6 +112,8 @@ export default function ProductPage() {
                     </div>
                 </div>
             </div>
+
+            <Subscribe/>
         </div>
     )
 }
