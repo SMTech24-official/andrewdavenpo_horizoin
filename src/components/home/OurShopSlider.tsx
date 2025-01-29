@@ -83,32 +83,32 @@ function OurShopSlider() {
         {cateGoryCards?.map((course) => (
           <SwiperSlide key={course?.id}>
             <div key={course.id} className="">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="bg-[#3f4145] p-3 rounded-lg shadow-lg overflow-hidden">
                 <div className="relative pb-[56.25%]">
                   <Image
                     src={course.image}
                     alt={course.title}
-                    className="absolute top-0 left-0 w-full h-full object-cover"
+                    className="absolute top-0 rounded-lg left-0 w-full h-full object-cover"
                   />
                   <div className="w-[50px] h-[50px] p-2 rounded-full z-[1000] absolute top-8 cursor-pointer right-2 transform -translate-y-1/2 bg-[#535252fc] hover:bg-[#434141fc] flex items-center justify-center">
                     <HiOutlineShoppingCart className="text-white text-[24px]" />
                   </div>
                 </div>
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold text-[#807D7D] mb-4 line-clamp-2">{course.title}</h3>
+                  <h3 className="text-lg font-semibold  mb-4 line-clamp-2">{course.title}</h3>
 
                   <div className="flex gap-4 py-[20px] items-center">
-                    <h2 className="text-black text-[20px]">$ {course.discountPrice}</h2>
-                    <h2 className="text-[18px] text-[#807D7D]">
+                    <h2 className=" text-[20px]">$ {course.discountPrice}</h2>
+                    <h2 className="text-[18px] ">
                       <del>${course.OldPrice}</del>
                     </h2>
                   </div>
 
                   <Link
                     href={`/productDetails/${course.id}`}
-                    className="w-full bg-bg_primary hover:bg-gray-700 text-white py-3 px-6 w-full block text-center rounded-md transition-colors duration-200"
+                    className="bg-white text-black py-3 px-6 w-full block text-center rounded-md transition-colors duration-200"
                   >
-                    Order Now
+                    Buy Now
                   </Link>
                 </div>
               </div>
