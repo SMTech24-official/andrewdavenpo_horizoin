@@ -13,11 +13,11 @@ export default function Subscribe() {
           Subscribe to our Newsletter for Newest Course Updates
         </h2>
 
-        <div className="flex flex-col max-w-[647px] sm:flex-row gap-4">
-          <Button asChild variant="secondary" className="flex w-[364px] py-4 justify-center items-center">
+        <div className="flex px-1 flex-col max-w-[647px] sm:flex-row gap-4">
+          <Button asChild variant="secondary" className="flex sm:w-[364px] w-full py-4 justify-center items-center">
             <Link href="/login">Login</Link>
           </Button>
-          <Button asChild variant="secondary" className="flex w-[364px] py-4 justify-center items-center">
+          <Button asChild variant="secondary" className="flex sm:w-[364px] w-full py-4 justify-center items-center">
             <Link href="/register">Register</Link>
           </Button>
         </div>
