@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
 import Providers from "@/lib/Providers";
+import { ToastContainer } from "react-toastify";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       <body className={`${lato.className} text-white antialiased`}>
         <Providers> {children}</Providers>
+        <ToastContainer />
       </body>
     </html>
   );

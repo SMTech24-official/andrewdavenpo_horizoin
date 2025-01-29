@@ -5,12 +5,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface UserState {
   user: any;
-  paymetMethod: boolean;
 }
 
 const initialState: UserState = {
   user: null,
-  paymetMethod: false,
 };
 
 export const userSlice = createSlice({
@@ -23,12 +21,9 @@ export const userSlice = createSlice({
     removeUser: (state) => {
       state.user = null;
     },
-    paymetMethod: (state, action) => {
-      state.paymetMethod = action.payload;
-    },
   },
 });
 
-export const { setUser, removeUser, paymetMethod } = userSlice.actions;
+export const { setUser, removeUser } = userSlice.actions;
 
 export default userSlice.reducer;
