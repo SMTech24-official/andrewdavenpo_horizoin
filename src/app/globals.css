@@ -3,4 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
+.bg-custom-gradient {
+  @apply bg-[radial-gradient(circle_at_center,#000000_0%,#002616_100%)];
+}

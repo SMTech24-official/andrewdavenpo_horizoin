@@ -22,7 +22,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-[radial-gradient(circle_at_center,#000000_0%,#002616_100%)]">
+    <div className="min-h-screen flex bg-custom-gradient">
       {/* Left Section - Image */}
       <div className="hidden md:flex md:w-1/2 relative">
         <Image src={student} alt="Person using laptop" fill className="object-cover" priority />
@@ -32,14 +32,14 @@ export default function LoginPage() {
       <div className="w-full  md:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center">
-            <h1 className="text-2xl font-semibold text-gray-900">Welcome To Event Horizon 👋</h1>
-            <p className="mt-2 text-sm text-gray-600">Please login here</p>
+            <h1 className="text-2xl font-semibold ">Welcome To Event Horizon 👋</h1>
+            <p className="mt-2 text-sm ">Please login here</p>
           </div>
 
           <form onSubmit={handleSubmit} className="mt-8 space-y-6">
             <div className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-[#333333]">
+                <label htmlFor="email" className="block text-sm font-medium ">
                   Email Address
                 </label>
                 <input
@@ -56,7 +56,7 @@ export default function LoginPage() {
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-[#333333]">
+                <label htmlFor="password" className="block text-sm font-medium ">
                   Password
                 </label>
                 <input
@@ -80,15 +80,15 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={formData.rememberMe}
                   onChange={(e) => setFormData({ ...formData, rememberMe: e.target.checked })}
-                  className="h-4 w-4 text-bg_primary focus:ring-bg_primary border-gray-300 rounded"
+                  className="h-4 w-4 focus:ring-bg_primary border-gray-300 rounded"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+                <label htmlFor="remember-me" className="ml-2 block text-sm ">
                   Remember Me
                 </label>
               </div>
 
               <div className="text-sm">
-                <Link href="/user/forget_password" className="text-gray-600 hover:text-gray-900">
+                <Link href="/user/forget_password" className="">
                   Forgot Password?
                 </Link>
               </div>
@@ -101,6 +101,15 @@ export default function LoginPage() {
               Login
             </button>
           </form>
+          {/* new to here signup */}
+          <div className="text-center text-sm">
+            <p>
+              New to Event Horizon?{" "}
+              <Link href="/signup" className="text-blue-500">
+                Sign Up
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

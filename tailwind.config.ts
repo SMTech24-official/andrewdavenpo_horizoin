@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Inter"]
+        inter: ["Inter"],
       },
       bg_primary: "#333333",
 
