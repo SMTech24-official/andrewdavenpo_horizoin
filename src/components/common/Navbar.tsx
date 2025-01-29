@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
 import Link from "next/link";
 import { LuSearch } from "react-icons/lu";
@@ -11,17 +11,46 @@ import { BsCart3 } from "react-icons/bs";
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // chnage color in scroll
+  const [scroll, setScroll] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="border-b-2 shadow-md bg-[#F3F2F2]">
+    <div
+      className={`absolute w-full top-0 left-0 z-50 ${scroll ? "bg-custom-gradient sticky" : "lg:bg-transparent "} `}
+    >
       <div className="container mx-auto py-4 px-4 md:px-8">
         {/* Desktop View */}
         <div className="hidden md:flex justify-between items-center">
           <Link href="/">
-            <Image src={logo} width={206} height={30} alt="logo" className="w-[206px] cursor-pointer" />
+            <Image
+              style={{
+                // make the image white
+                filter: "invert(1)",
+              }}
+              src={logo}
+              width={206}
+              height={30}
+              alt="logo"
+              className="w-[206px] cursor-pointer"
+            />
           </Link>
 
           {/* Desktop Menu */}
-          <ul className="hidden lg:flex text-bg_primary text-[18px] gap-8">
+          <ul className="hidden lg:flex  text-[18px] gap-8">
             <li className="cursor-pointer font-medium">
               <Link href="/">Home</Link>
             </li>
@@ -38,8 +67,8 @@ export default function Navbar() {
 
           {/* Icons and Login Button */}
           <div className="hidden lg:flex items-center gap-6">
-            <LuSearch className="text-bg_primary w-6 h-6 cursor-pointer" />
-            <BsCart3 className="text-bg_primary w-6 h-6 cursor-pointer" />
+            <LuSearch className=" w-6 h-6 cursor-pointer" />
+            <BsCart3 className=" w-6 h-6 cursor-pointer" />
             <Link
               href="/login"
               className="py-2 px-6 rounded-lg text-white text-[18px] bg-bg_primary hover:bg-gray-900 transition-all"
@@ -72,7 +101,7 @@ export default function Navbar() {
             isMobileMenuOpen ? "mt-4" : "hidden"
           }`}
         >
-          <ul className="text-bg_primary text-[18px] flex flex-col gap-4 p-4">
+          <ul className=" text-[18px] flex flex-col gap-4 p-4">
             <li className="cursor-pointer font-medium">
               <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
                 Home
@@ -94,8 +123,8 @@ export default function Navbar() {
               </Link>
             </li>
             <div className="flex gap-4 mt-4">
-              <LuSearch className="text-bg_primary w-6 h-6 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />
-              <BsCart3 className="text-bg_primary w-6 h-6 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />
+              <LuSearch className=" w-6 h-6 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />
+              <BsCart3 className=" w-6 h-6 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />
             </div>
             <Link
               href="/user/login"
