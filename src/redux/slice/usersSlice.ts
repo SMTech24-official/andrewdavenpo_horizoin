@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // create slice to store data and remove data of user
 
 import { createSlice } from "@reduxjs/toolkit";
