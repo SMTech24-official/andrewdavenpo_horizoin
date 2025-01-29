@@ -1,10 +1,8 @@
 "use client";
-import Image from "next/image";
-import React, { useEffect, useState } from "react";
 import logo from "@/assets/logo.png";
+import Image from "next/image";
 import Link from "next/link";
-import { LuSearch } from "react-icons/lu";
-import { BsCart3 } from "react-icons/bs";
+import { useEffect, useState } from "react";
 import { CartSidebar } from "../shared/CartSidebar";
 // import { FiMenu, FiX } from 'react-icons/fi';
 // import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
