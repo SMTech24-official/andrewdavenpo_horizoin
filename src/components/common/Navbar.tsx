@@ -30,11 +30,13 @@ export default function Navbar() {
 
   return (
     <div
-      className={`absolute w-full top-0 left-0 z-50 ${scroll ? "bg-custom-gradient sticky" : "lg:bg-transparent "} `}
+      className={`absolute w-full top-0 left-0 z-50 ${
+        scroll ? "bg-custom-gradient sticky" : "lg:bg-transparent bg-custom-gradient"
+      } `}
     >
       <div className="container mx-auto py-4 px-4 md:px-8">
         {/* Desktop View */}
-        <div className="hidden md:flex justify-between items-center">
+        <div className="hidden lg:flex justify-between items-center bg-custom-gradient">
           <Link href="/">
             <Image
               style={{
@@ -79,12 +81,22 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Toggle Button */}
-        <div className="flex justify-between items-center  md:hidden">
+        <div className="flex justify-between items-center  lg:hidden ">
           <Link href="/">
-            <Image src={logo} width={180} height={25} alt="logo" className="w-[180px] cursor-pointer" />
+            <Image
+              src={logo}
+              width={180}
+              height={25}
+              alt="logo"
+              className="w-[180px] cursor-pointer"
+              style={{
+                // make the image white
+                filter: "invert(1)",
+              }}
+            />
           </Link>
-          <button className="focus:outline-none" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black">
+          <button className="focus:outline-none " onClick={() => setIsMobileMenuOpen((prev) => !prev)}>
+            <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -97,7 +109,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`transition-transform  bg-[#F3F2F2] duration-300 overflow-hidden md:hidden ${
+          className={`transition-transform  bg-custom-gradient duration-300 overflow-hidden lg:hidden ${
             isMobileMenuOpen ? "mt-4" : "hidden"
           }`}
         >
