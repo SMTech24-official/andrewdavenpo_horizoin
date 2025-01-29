@@ -48,7 +48,8 @@ export default function LoginPage() {
                   required
                   value={formData.fname}
                   onChange={(e) => setFormData({ ...formData, fname: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 
+                  text-black focus:ring-blue-500 focus:border-blue-500"
                   placeholder="kristin.watson@example.com"
                 />
               </div>
@@ -65,7 +66,7 @@ export default function LoginPage() {
                   required
                   value={formData.lname}
                   onChange={(e) => setFormData({ ...formData, lname: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
                   placeholder="kristin.watson@example.com"
                 />
               </div>
@@ -82,7 +83,7 @@ export default function LoginPage() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 text-black focus:ring-blue-500 focus:border-blue-500"
                   placeholder="kristin.watson@example.com"
                 />
               </div>
@@ -99,7 +100,7 @@ export default function LoginPage() {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black"
                 />
               </div>
             </div>
@@ -112,7 +113,7 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={formData.rememberMe}
                   onChange={(e) => setFormData({ ...formData, rememberMe: e.target.checked })}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h-4 w-4  focus:ring-blue-500 border-gray-300 rounded text-black"
                 />
                 <label htmlFor="remember-me" className="ml-2 block text-sm ">
                   I agree to the
@@ -128,7 +129,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-white text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
               Sign up
             </button>
