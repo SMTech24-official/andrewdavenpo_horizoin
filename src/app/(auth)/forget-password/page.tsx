@@ -5,8 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import student from "@/assets/student.png";
 import { useRouter } from "next/navigation";
+import { useForgotPasswordMutation } from "@/redux/api/authApi";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
+  const [forgetPasswordFn] = useForgotPasswordMutation();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,11 +18,19 @@ export default function LoginPage() {
   });
   const route = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle login logic here
     console.log("Login attempted:", formData);
-    route.push("/user/forget_password/otp");
+    try {
+      await forgetPasswordFn({ email: formData.email });
+      toast.success("Otp sent successfully");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong");
+    }
+
+    route.push("/forget-password/otp");
   };
 
   return (
