@@ -32,13 +32,13 @@ export default function Herosection() {
               <div className="flex gap-6 pt-10">
                 <Link
                   href={"/"}
-                  className="py-[10px] border-2 hover:border-bg_primary hover:text-bg_primary px-[20px] rounded-[8px] text-white text-[18px] bg-bg_primary hover:bg-transparent transition-all"
+                  className="py-[10px] border-2 px-[20px] rounded-[8px] bg-white text-[18px] text-black  transition-all"
                 >
                   Explore more
                 </Link>
                 <Link
                   href={"/"}
-                  className="py-[10px] px-[20px] rounded-[8px] text-bg_primary text-[18px] border-2  border-bg_primary bg-transparent hover:bg-bg_primary hover:text-white transition-all"
+                  className="py-[10px] px-[20px] rounded-[8px]  text-[18px] border-2  border-white bg-transparent text-white transition-all"
                 >
                   Shop Now
                 </Link>
