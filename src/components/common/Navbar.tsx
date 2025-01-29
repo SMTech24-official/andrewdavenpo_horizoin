@@ -4,11 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CartSidebar } from "../shared/CartSidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { Button } from "../ui/button";
+import { removeFromLocalStorage } from "@/utils/local-storage";
+import { authKey } from "@/constants/authkey";
+import { removeUser } from "@/redux/slice/usersSlice";
 // import { FiMenu, FiX } from 'react-icons/fi';
 // import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const dispatch = useDispatch();
+
+  // get user from redux store
+
+  const user = useSelector((state: RootState) => state.user.user);
+
+  console.log(user);
 
   // chnage color in scroll
   const [scroll, setScroll] = useState(false);
@@ -26,6 +40,11 @@ export default function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  const handleLogout = () => {
+    removeFromLocalStorage(authKey);
+    dispatch(removeUser());
+  };
 
   return (
     <div
@@ -67,15 +86,22 @@ export default function Navbar() {
           </ul>
 
           {/* Icons and Login Button */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex justify-center items-center gap-6">
             {/* <LuSearch className=" w-6 h-6 cursor-pointer" /> */}
             <CartSidebar />
-            <Link
-              href="/login"
-              className="py-2 px-6 rounded-lg text-white text-[18px] bg-bg_primary hover:bg-gray-900 transition-all"
-            >
-              Login
-            </Link>
+            {user ? (
+              <Button onClick={handleLogout} variant={"destructive"}>
+                Logout
+              </Button>
+            ) : (
+              <Link
+                href="/login"
+                className="py-2 px-6  rounded-lg text-white text-[18px] bg-bg_primary text-center hover:bg-gray-900 transition-all"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
 
@@ -133,17 +159,23 @@ export default function Navbar() {
                 Member Area
               </Link>
             </li>
-            <div className="flex gap-4 mt-4">
+            <div className="flex items-center justify-center gap-4 mt-4">
               {/* <LuSearch className=" w-6 h-6 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} /> */}
               <CartSidebar />
             </div>
-            <Link
-              href="/user/login"
-              className="py-2 px-6 mt-4 rounded-lg text-white text-[18px] bg-bg_primary text-center hover:bg-gray-900 transition-all"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Login
-            </Link>
+            {user ? (
+              <Button onClick={handleLogout} variant={"destructive"}>
+                Logout
+              </Button>
+            ) : (
+              <Link
+                href="/login"
+                className="py-2 px-6 mt-4 rounded-lg text-white text-[18px] bg-bg_primary text-center hover:bg-gray-900 transition-all"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Login
+              </Link>
+            )}
           </ul>
         </div>
       </div>

@@ -12,22 +12,13 @@ import { setToLocalStorage } from "@/utils/local-storage";
 import { authKey } from "@/constants/authkey";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/slice/usersSlice";
-// pybekece@mailinator.com
-
-// {
-//   "success": true,
-//   "message": "User logged in successfully",
-//   "data": {
-//       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3OWEyZjM3ZmI2OGMxM2Q2MDc1NTE0NSIsImVtYWlsIjoicHliZWtlY2VAbWFpbGluYXRvci5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTczODE1NzkxNCwiZXhwIjoxNzQwNzQ5OTE0fQ._ju9QOCw6y9seKZ7mqhJtSElUlDia1POE62JjrdrwnI"
-//   }
-// }
 
 export default function LoginPage() {
   const [loginMutationFn, { isLoading, data }] = useLoginMutation();
   const { data: userDataFromApi } = useGetUserDataFromApiQuery(
     {},
     {
-      skip: !data?.data,
+      skip: !data?.success,
     }
   );
 

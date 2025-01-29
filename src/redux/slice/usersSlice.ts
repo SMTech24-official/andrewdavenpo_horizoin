@@ -4,7 +4,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface UserState {
-  user: any;
+  user: any | null;
 }
 
 const initialState: UserState = {
