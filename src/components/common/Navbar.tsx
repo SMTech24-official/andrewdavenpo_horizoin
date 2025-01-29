@@ -5,6 +5,7 @@ import logo from "@/assets/logo.png";
 import Link from "next/link";
 import { LuSearch } from "react-icons/lu";
 import { BsCart3 } from "react-icons/bs";
+import { CartSidebar } from "../shared/CartSidebar";
 // import { FiMenu, FiX } from 'react-icons/fi';
 // import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 
@@ -69,8 +70,8 @@ export default function Navbar() {
 
           {/* Icons and Login Button */}
           <div className="hidden lg:flex items-center gap-6">
-            <LuSearch className=" w-6 h-6 cursor-pointer" />
-            <BsCart3 className=" w-6 h-6 cursor-pointer" />
+            {/* <LuSearch className=" w-6 h-6 cursor-pointer" /> */}
+            <CartSidebar />
             <Link
               href="/login"
               className="py-2 px-6 rounded-lg text-white text-[18px] bg-bg_primary hover:bg-gray-900 transition-all"
@@ -135,8 +136,8 @@ export default function Navbar() {
               </Link>
             </li>
             <div className="flex gap-4 mt-4">
-              <LuSearch className=" w-6 h-6 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />
-              <BsCart3 className=" w-6 h-6 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} />
+              {/* <LuSearch className=" w-6 h-6 cursor-pointer" onClick={() => setIsMobileMenuOpen(false)} /> */}
+              <CartSidebar />
             </div>
             <Link
               href="/user/login"
