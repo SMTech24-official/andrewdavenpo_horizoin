@@ -5,6 +5,7 @@ import { X, Trash2 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import productImge from "@/assets/pngimg.com - book_PNG2111 1.png";
+import Image from "next/image";
 
 interface CartItem {
   id: string;
@@ -92,7 +93,13 @@ export function CartSidebar({ items: initialItems }: CartProps) {
             {items.map((item) => (
               <div key={item.id} className="flex items-start gap-4 rounded-lg bg-zinc-800/50 p-4">
                 <div className="h-16 w-16 rounded-md bg-zinc-800 p-2">
-                  <img src={item.image || "/placeholder.svg"} alt={item.title} className="h-full w-full object-cover" />
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    className="h-full w-full object-cover"
+                    height={64}
+                    width={64}
+                  />
                 </div>
                 <div className="flex-1 space-y-1">
                   <h3 className="font-medium text-white">{item.title}</h3>
