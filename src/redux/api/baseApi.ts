@@ -7,7 +7,7 @@ const BASEAPI = process.env.NEXT_PUBLIC_BASEURL;
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: BASEAPI,
+    baseUrl:"http://localhost:3000/api/v1",
     prepareHeaders: (headers: Headers) => {
       if (typeof window !== "undefined") {
         const token = localStorage.getItem("accessToken");
@@ -20,5 +20,5 @@ export const baseApi = createApi({
     credentials: "include",
   }),
   endpoints: () => ({}),
-  tagTypes: ["Auth"],
+  tagTypes: ["Auth", "Book", "Video"],
 });
