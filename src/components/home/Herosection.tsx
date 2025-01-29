@@ -10,7 +10,7 @@ export default function Herosection() {
 
   return (
     <div
-      className=""
+      className="pt-20"
       // background image
       style={{
         backgroundImage: `url(${barnnerImage.src})`,
