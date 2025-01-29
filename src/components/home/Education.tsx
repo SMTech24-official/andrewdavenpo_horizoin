@@ -42,7 +42,7 @@ export default function Education() {
   };
 
   return (
-    <div className="  mx-auto py-[80px] sm:px-6 lg:px-8">
+    <div className="mx-auto py-[80px] sm:px-6 lg:px-8 bg-[#2b2f33]">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-[38px] font-bold  mb-2">Educational Resources</h1>

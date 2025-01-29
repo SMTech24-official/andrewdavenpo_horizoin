@@ -5,7 +5,7 @@ import store from "@/assets/svg/store.svg";
 import teacher from "@/assets/svg/teacher.svg";
 export default function WhoAreYou() {
   return (
-    <div>
+    <div className="">
       <div className="container mx-auto py-[80px]">
         <div className="grid lg:grid-cols-2  grid-cols-1  justify-between items-center">
           <div className="lg:flex-none flex justify-center">
