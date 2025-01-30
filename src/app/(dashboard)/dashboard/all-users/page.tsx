@@ -16,7 +16,8 @@ interface User {
 }
 
 export default function AllUsers() {
-  const { data, isLoading, isError } = useGetAllUsersQuery();
+  const { data, isLoading, isError } = useGetAllUsersQuery({});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const users = data?.data?.data || [];
 
   const [sortConfig, setSortConfig] = useState<{ key: keyof User; direction: "asc" | "desc" } | null>(null);
