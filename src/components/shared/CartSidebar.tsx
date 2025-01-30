@@ -1,47 +1,29 @@
 "use client";
 
 
-import { X, Trash2 } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import productImge from "@/assets/pngimg.com - book_PNG2111 1.png";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { removeCartItem } from "@/redux/slice/cartSlice";
+import { RootState } from "@/redux/store";
+import { Trash2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 
-
-interface CartItem {
-  id: string;
-  title: string;
-  price: number;
-  originalPrice: number;
-  quantity: number;
-  image: string;
-}
-interface BookDetails {
-  bookId: string;
-  quantity: number;
-  name: string;
-  thumbImage: string;
-  price: number;
-  discountedPrice: number;
-}
 
 
 
 export function CartSidebar() {
 
   const dispatch = useDispatch();
-  const items = useSelector((state: RootState) => state.cart.items) || []; // Fetch cart items from Redux state
+  const items = useSelector((state: RootState) => state.cart.items) || []; 
 
   const removeItem = (id: string) => {
     // Dispatch action to remove the item
     dispatch(removeCartItem(id));
   };
 
-  const subtotal = items?.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = items?.reduce((sum, item) => sum + item.discountedPrice * item.quantity, 0);
 
   return (
     <Sheet>
@@ -96,7 +78,7 @@ export function CartSidebar() {
                 <div className="flex-1 space-y-1">
                   <h3 className="font-medium text-white">{item.name}</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold">${Number(item.price).toFixed(2)}</span>
+                    <span className="text-lg font-bold">${Number(item.discountedPrice).toFixed(2)}</span>
                     <span className="text-sm text-zinc-400 line-through">${Number(item.price).toFixed(2)}</span>
                   </div>
                   <div className="flex items-center justify-between">
@@ -121,7 +103,7 @@ export function CartSidebar() {
             <span className="text-base font-medium">Subtotal</span>
             <span className="text-lg font-bold">${subtotal.toFixed(2)}</span>
           </div>
-          <Button className="w-full bg-white text-black hover:bg-white/90">Checkout</Button>
+          <Link href="/orders"><Button className="w-full bg-white text-black hover:bg-white/90">Checkout</Button></Link>
         </div>
       </SheetContent>
     </Sheet>

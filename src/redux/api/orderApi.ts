@@ -15,7 +15,7 @@ const orderApi = baseApi.injectEndpoints({
     createOrder: build.mutation({
       query: (data: any) => {
         return {
-          url: `/create-order`,
+          url: `/orders/create-order`,
           method: "POST",
           body: data,
         };

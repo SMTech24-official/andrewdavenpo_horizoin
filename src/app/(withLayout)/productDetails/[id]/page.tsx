@@ -31,8 +31,7 @@ export default function ProductPage() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedImage, setSelectedImage] = useState(0);
   const images = Array(4).fill(orderBook);
-  const originalPrice = 190.0;
-  const discountedPrice = 170.0;
+
 
   const { data, isLoading } = useGetBookByIdQuery(id as string);
 
@@ -130,8 +129,8 @@ export default function ProductPage() {
           </div> */}
 
           <div className="flex items-baseline space-x-3">
-            <span className="text-2xl font-bold">${discountedPrice?.toFixed(2)}</span>
-            <span className="text-lg  line-through">${originalPrice.toFixed(2)}</span>
+            <span className="text-2xl font-bold">${book?.discountPrice?.toFixed(2)}</span>
+            <span className="text-lg  line-through">${book?.price?.toFixed(2)}</span>
           </div>
 
           <p className=" text-lg">{book.description}</p>
