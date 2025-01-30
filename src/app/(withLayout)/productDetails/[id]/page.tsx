@@ -77,9 +77,9 @@ export default function ProductPage({ params }: { params: any }) {
 
         {/* Product Info */}
         <div className="space-y-6 pt-[30px]">
-          <h1 className="text-[24px] font-semibold">English Textbook for Class 12</h1>
+          <h1 className="text-[24px] font-semibold">{book.name}</h1>
 
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center space-x-2">
             <div className="flex text-yellow-400">
               {[...Array(5)].map((_, i) => (
                 <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -90,7 +90,7 @@ export default function ProductPage({ params }: { params: any }) {
             <span className="text-[16px] ">
               {rating} ({reviews} Reviews)
             </span>
-          </div>
+          </div> */}
 
           <div className="flex items-baseline space-x-3">
             <span className="text-2xl font-bold">${discountedPrice.toFixed(2)}</span>
@@ -98,8 +98,7 @@ export default function ProductPage({ params }: { params: any }) {
           </div>
 
           <p className=" text-lg">
-            It is a long established fact that a reader will be distracted by the readable content of a page when
-            looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution.
+            {book.description}
           </p>
 
           <div className="flex space-x-4">

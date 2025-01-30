@@ -5,8 +5,18 @@ import Herosection from "@/components/home/Herosection";
 // import Subscribe from "@/components/home/Subscribe";
 import EducationalResourcesCard from "@/components/shared/EducationalResourcesCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
-
+import { useGetAllVideoQuery } from "@/redux/api/videoApi";
+interface Video {
+  id: string;
+  title: string;
+  ytVideoLink: string;
+  thumbImage: string;
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+}
 export default function MembersPage() {
+  const { data, isLoading } = useGetAllVideoQuery(undefined)
+  const videos = data?.data || []
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -29,8 +39,8 @@ export default function MembersPage() {
 
       <div className="container mx-auto pt-[40px] pb-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {selectedItems.map((item) => (
-            <EducationalResourcesCard key={item} />
+          {videos?.map((item: Video) => (
+            <EducationalResourcesCard item={item} key={item.id} />
           ))}
         </div>
         <div className="flex justify-center gap-3 items-center mt-6">
@@ -43,9 +53,8 @@ export default function MembersPage() {
           {Array.from({ length: totalPages }).map((_, index) => (
             <span
               key={index}
-              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${
-                currentPage === index + 1 ? "bg-gray-300" : ""
-              } rounded`}
+              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${currentPage === index + 1 ? "bg-gray-300" : ""
+                } rounded`}
             >
               {index + 1}
             </span>
