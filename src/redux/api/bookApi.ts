@@ -36,11 +36,11 @@ const bookApi = baseApi.injectEndpoints({
     }),
     // update book
     updateBook: build.mutation({
-      query: (data: any) => {
+      query: ({ id, formdata }) => {
         return {
-          url: `/books/${data.id}`,
+          url: `/books/${id}`,
           method: "PUT",
-          body: data,
+          body: formdata,
         };
       },
       invalidatesTags: ["Books"],

@@ -20,7 +20,6 @@ interface Book {
 }
 
 export default function BookManagement() {
-  const [books, setBooks] = useState<Book[]>([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingBook, setEditingBook] = useState<Book | null>(null);
   const { data: allbooksData, error: allBooksError, isLoading: allBooksLoading } = useGetAllBooksQuery(undefined);
@@ -29,7 +28,7 @@ export default function BookManagement() {
   const [deleteBookMutationFunction, { isLoading: deleteBookIsLoading }] = useDeleteBookMutation();
 
   const allBooks = allbooksData?.data;
-//   console.log(allBooks && allBooks[0]);
+  //   console.log(allBooks && allBooks[0]);
 
   const handleDelete = async () => {
     // setBooks(books.filter((book) => book.id !== id));
@@ -50,12 +49,6 @@ export default function BookManagement() {
   const handleEdit = (book: Book) => {
     setEditingBook(book);
     setIsEditModalOpen(true);
-  };
-
-  const handleEditSave = (editedBook: Book) => {
-    setBooks(books.map((book) => (book.id === editedBook.id ? editedBook : book)));
-    setIsEditModalOpen(false);
-    // In a real application, you would also make an API call to update the book
   };
 
   if (allBooksLoading) return <div>Loading...</div>;
@@ -121,12 +114,7 @@ export default function BookManagement() {
           )}
         </TableBody>
       </Table>
-      <EditBookModal
-        isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        book={editingBook}
-        onSave={handleEditSave}
-      />
+      <EditBookModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} book={editingBook} />
 
       {/* Confirmation Modal */}
       <Dialog open={confirmationModalOpen} onOpenChange={() => setConfirmationModalOpen(false)}>
