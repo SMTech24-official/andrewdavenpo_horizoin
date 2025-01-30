@@ -5,11 +5,12 @@ import { useState } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 
-import { useGetAllVideoQuery } from "@/redux/api/videoApi";
+import { useDeleteVideoMutation, useGetAllVideoQuery } from "@/redux/api/videoApi";
 import { DeleteConfirmationModal } from "@/components/dashboard/videos/DeleteConfirmationModal";
 import { EditVideoModal } from "@/components/dashboard/videos/EditVideoModal";
 import Image from "next/image";
 import { Edit, Trash2 } from "lucide-react";
+import { toast } from "react-toastify";
 
 interface Video {
   id: string;
@@ -35,16 +36,30 @@ export default function VideoListPage() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [videoToDelete, setVideoToDelete] = useState<string | null>(null);
   const [videoToEdit, setVideoToEdit] = useState<Video | null>(null);
+  const [deleteVideoFn, { isLoading: isDeleteLoading }] = useDeleteVideoMutation();
 
   const handleDeleteClick = (id: string) => {
     setVideoToDelete(id);
     setIsDeleteModalOpen(true);
   };
 
-  const handleDeleteConfirm = () => {
-    if (videoToDelete) {
-      setIsDeleteModalOpen(false);
-      setVideoToDelete(null);
+  const handleDeleteConfirm = async () => {
+    // if (videoToDelete) {
+    //   setIsDeleteModalOpen(false);
+    //   setVideoToDelete(null);
+    // }
+
+    try {
+      const response = await deleteVideoFn(videoToDelete).unwrap();
+      console.log("Video deleted", response);
+      if (response.success) {
+        toast.success("Video deleted successfully");
+        setIsDeleteModalOpen(false);
+        setVideoToDelete(null);
+      }
+    } catch (error) {
+      console.error("Failed to delete video", error);
+      toast.error("Failed to delete video");
     }
   };
 
@@ -114,6 +129,7 @@ export default function VideoListPage() {
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteConfirm}
+        isLoading={isDeleteLoading}
       />
       {videoToEdit && (
         <EditVideoModal
