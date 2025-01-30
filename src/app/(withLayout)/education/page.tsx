@@ -26,11 +26,10 @@ export default function EducationPage() {
   return (
     <div>
       <Herosection />
-
       <div className="container mx-auto pt-[40px] pb-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {selectedItems.map((item) => (
-            <EducationalResourcesCard key={item} />
+          {selectedItems.map((item: any) => (
+            <EducationalResourcesCard item={item} key={item.id} />
           ))}
         </div>
         <div className="flex justify-center gap-3 items-center mt-6">
@@ -39,13 +38,11 @@ export default function EducationPage() {
           </button>
 
           {/* rounded page numger */}
-
           {Array.from({ length: totalPages }).map((_, index) => (
             <span
               key={index}
-              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${
-                currentPage === index + 1 ? "bg-gray-300" : ""
-              } rounded`}
+              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${currentPage === index + 1 ? "bg-gray-300" : ""
+                } rounded`}
             >
               {index + 1}
             </span>
