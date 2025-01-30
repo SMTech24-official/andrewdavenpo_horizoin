@@ -18,7 +18,7 @@ const Sidebar = () => {
   const dispatech = useDispatch();
 
   return (
-    <div className="relative">
+    <div className="relative bg-[#2a2c31]">
       {/* Sidebar toggle button for smaller screens */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -29,7 +29,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:static top-0 left-0 bg-primary text-white p-4 transition-transform transform lg:translate-x-0 z-50 lg:w-[300px] h-screen overflow-hidden overflow-y-auto ${
+        className={`fixed lg:static top-0 left-0 bg-[#2a2c31] text-white p-4 transition-transform transform lg:translate-x-0 z-50 lg:w-[300px] h-screen overflow-hidden overflow-y-auto ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
