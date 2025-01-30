@@ -103,6 +103,7 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  defaultValue={"pybekece@mailinator.com"}
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -119,6 +120,7 @@ export default function LoginPage() {
                   id="password"
                   name="password"
                   type="password"
+                  defaultValue={"12345678"}
                   autoComplete="current-password"
                   required
                   value={formData.password}

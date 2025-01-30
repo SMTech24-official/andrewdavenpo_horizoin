@@ -48,9 +48,8 @@ export default function Navbar() {
 
   return (
     <div
-      className={`absolute w-full top-0 left-0 z-50 ${
-        scroll ? "bg-custom-gradient sticky" : "lg:bg-transparent bg-custom-gradient"
-      } `}
+      className={`absolute w-full top-0 left-0 z-50 ${scroll ? "bg-custom-gradient sticky" : "lg:bg-transparent bg-custom-gradient"
+        } `}
     >
       <div className="container mx-auto py-4 px-4 md:px-8">
         {/* Desktop View */}
@@ -81,7 +80,7 @@ export default function Navbar() {
               <Link href="/store">Store</Link>
             </li>
             <li className="cursor-pointer font-medium">
-              <Link href="/member">Member Area</Link>
+              <Link href="/member">Subscribe</Link>
             </li>
           </ul>
 
@@ -134,9 +133,8 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`transition-transform  bg-custom-gradient duration-300 overflow-hidden lg:hidden ${
-            isMobileMenuOpen ? "mt-4" : "hidden"
-          }`}
+          className={`transition-transform  bg-custom-gradient duration-300 overflow-hidden lg:hidden ${isMobileMenuOpen ? "mt-4" : "hidden"
+            }`}
         >
           <ul className=" text-[18px] flex flex-col gap-4 p-4">
             <li className="cursor-pointer font-medium">
@@ -156,7 +154,7 @@ export default function Navbar() {
             </li>
             <li className="cursor-pointer font-medium">
               <Link href="/member" onClick={() => setIsMobileMenuOpen(false)}>
-                Member Area
+                Subscribe
               </Link>
             </li>
             <div className="flex items-center justify-center gap-4 mt-4">
