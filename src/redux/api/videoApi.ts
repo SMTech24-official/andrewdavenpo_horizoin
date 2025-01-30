@@ -3,7 +3,7 @@ import { baseApi } from "./baseApi";
 
 const videoApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    // login
+    // ceatee video
     createVideo: build.mutation({
       query: (data: any) => {
         return {
@@ -23,7 +23,36 @@ const videoApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Videos"],
     }),
+
+    // get vidwdeo by id
+    getVideoById: build.query({
+      query: (id: string) => ({
+        url: `/videos/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Videos"],
+    }),
+
+    // update video by id
+
+    updateVideo: build.mutation({
+      query: ({ id, data }) => ({
+        url: `/videos/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Videos"],
+    }),
+
+    // delete video by id
+    deleteVideo: build.mutation({
+      query: (id: string) => ({
+        url: `/videos/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Videos"],
+    }),
   }),
 });
 
-export const { useCreateVideoMutation,useGetAllVideoQuery } = videoApi;
+export const { useCreateVideoMutation, useGetAllVideoQuery } = videoApi;
