@@ -24,7 +24,7 @@ export default function RootLayout({
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       <body className={`${lato.className} text-white antialiased`}>
         <Providers> {children}</Providers>
-        <ToastContainer />
+        <ToastContainer position="bottom-right" />
       </body>
     </html>
   );

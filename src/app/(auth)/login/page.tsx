@@ -10,8 +10,9 @@ import { toast } from "react-toastify";
 import setAccessToken from "@/service/actions/setAccessToken";
 import { setToLocalStorage } from "@/utils/local-storage";
 import { authKey } from "@/constants/authkey";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slice/usersSlice";
+import { RootState } from "@/redux/store";
 
 export default function LoginPage() {
   const [loginMutationFn, { isLoading, data }] = useLoginMutation();
@@ -21,6 +22,8 @@ export default function LoginPage() {
       skip: !data?.success,
     }
   );
+
+  const user = useSelector((state: RootState) => state.user.user);
 
   console.log("userDataFromApi:", userDataFromApi);
 
@@ -58,13 +61,21 @@ export default function LoginPage() {
         toast.success("Logged in successfully");
         setAccessToken(response.data.token);
         setToLocalStorage(authKey, response.data.token);
-        route.push("/");
+        // if (user) {
+        //   route.push("/");
+        // }
       }
     } catch (error) {
       console.error("Error:", error);
       toast.error("Invalid credentials");
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      route.push("/");
+    }
+  }, [route, user]);
 
   return (
     <div className="min-h-screen flex bg-custom-gradient">
