@@ -1,5 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import rootReducer from "./rootReducer";
 import { baseApi } from "./api/baseApi";
@@ -7,7 +16,7 @@ import { baseApi } from "./api/baseApi";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "location"], // Add the slices you want to persist
+  whitelist: ["user", "location", "cart"], // Add the slices you want to persist
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

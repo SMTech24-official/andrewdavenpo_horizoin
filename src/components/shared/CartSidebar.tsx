@@ -1,11 +1,16 @@
 "use client";
 
-import * as React from "react";
+
 import { X, Trash2 } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import productImge from "@/assets/pngimg.com - book_PNG2111 1.png";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { removeCartItem } from "@/redux/slice/cartSlice";
+
 
 interface CartItem {
   id: string;
@@ -15,38 +20,28 @@ interface CartItem {
   quantity: number;
   image: string;
 }
-
-interface CartProps {
-  items?: CartItem[];
+interface BookDetails {
+  bookId: string;
+  quantity: number;
+  name: string;
+  thumbImage: string;
+  price: number;
+  discountedPrice: number;
 }
 
-export function CartSidebar({ items: initialItems }: CartProps) {
-  const [items, setItems] = React.useState<CartItem[]>(
-    initialItems || [
-      {
-        id: "1",
-        title: "English Textbook for Class 12",
-        price: 170.0,
-        originalPrice: 190.0,
-        quantity: 1,
-        image: productImge.src,
-      },
-      {
-        id: "2",
-        title: "English Textbook for Class 12",
-        price: 170.0,
-        originalPrice: 190.0,
-        quantity: 1,
-        image: productImge.src,
-      },
-    ]
-  );
+
+
+export function CartSidebar() {
+
+  const dispatch = useDispatch();
+  const items = useSelector((state: RootState) => state.cart.items) || []; // Fetch cart items from Redux state
 
   const removeItem = (id: string) => {
-    setItems(items.filter((item) => item.id !== id));
+    // Dispatch action to remove the item
+    dispatch(removeCartItem(id));
   };
 
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = items?.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
     <Sheet>
@@ -78,34 +73,31 @@ export function CartSidebar({ items: initialItems }: CartProps) {
           <div className="flex items-center justify-between">
             <SheetTitle className="text-white">My Cart</SheetTitle>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-white hover:text-white/70">
-                <X className="h-4 w-4" />
-                <span className="sr-only">Close cart</span>
-              </Button>
+              {/* Optional Close Button */}
             </SheetTrigger>
           </div>
           <p className="text-sm text-zinc-400">
-            You have {items.length} {items.length === 1 ? "item" : "items"} in your cart
+            You have {items?.length} {items?.length === 1 ? "item" : "items"} in your cart
           </p>
         </SheetHeader>
         <div className="mt-8 flex-1 overflow-y-auto">
           <div className="space-y-4">
-            {items.map((item) => (
-              <div key={item.id} className="flex items-start gap-4 rounded-lg bg-zinc-800/50 p-4">
+            {items && items?.map((item) => (
+              <div key={item.bookId} className="flex items-start gap-4 rounded-lg bg-zinc-800/50 p-4">
                 <div className="h-16 w-16 rounded-md bg-zinc-800 p-2">
                   <Image
-                    src={item.image}
-                    alt={item.title}
+                    src={item.thumbImage}
+                    alt={item.name}
                     className="h-full w-full object-cover"
                     height={64}
                     width={64}
                   />
                 </div>
                 <div className="flex-1 space-y-1">
-                  <h3 className="font-medium text-white">{item.title}</h3>
+                  <h3 className="font-medium text-white">{item.name}</h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-lg font-bold">${item.price.toFixed(2)}</span>
-                    <span className="text-sm text-zinc-400 line-through">${item.originalPrice.toFixed(2)}</span>
+                    <span className="text-lg font-bold">${Number(item.price).toFixed(2)}</span>
+                    <span className="text-sm text-zinc-400 line-through">${Number(item.price).toFixed(2)}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <p className="text-sm text-zinc-400">QTY: {item.quantity}</p>
@@ -113,7 +105,7 @@ export function CartSidebar({ items: initialItems }: CartProps) {
                       variant="ghost"
                       size="icon"
                       className="text-zinc-400 hover:text-white"
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => removeItem(item.bookId)}
                     >
                       <Trash2 className="h-4 w-4" />
                       <span className="sr-only">Remove item</span>

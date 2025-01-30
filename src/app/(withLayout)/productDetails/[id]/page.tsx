@@ -1,12 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import orderBook from "@/assets/orderbook.png";
 import { BsCart3 } from "react-icons/bs";
 import Subscribe from "@/components/home/Subscribe";
 import { useGetBookByIdQuery } from "@/redux/api/bookApi";
+import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+
+import { addOrUpdateCartItem, ICartItem } from "@/redux/slice/cartSlice";
+import { RootState } from "@/redux/store";
 interface IBook {
   id: string;
   name: string;
@@ -19,29 +25,56 @@ interface IBook {
   updatedAt: string;
 }
 
-export default function ProductPage({ params }: { params: any }) {
-  const { id } = params;
+export default function ProductPage() {
+  const { id } = useParams()
   const [quantity, setQuantity] = useState(1);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedImage, setSelectedImage] = useState(0);
   const images = Array(4).fill(orderBook);
   const originalPrice = 190.0;
   const discountedPrice = 170.0;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const rating = 5.0;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const reviews = 121;
-  const { data, isLoading } = useGetBookByIdQuery(id);
+
+  const { data, isLoading } = useGetBookByIdQuery(id as string);
 
   const book: IBook = data?.data || {};
+
+  const cart = useSelector((state: RootState) => state.cart.items);
+
+  console.log("Cart form redux", cart);
+
+  useEffect(() => {
+    const cartItem = cart?.find((item: ICartItem) => item?.bookId === book?.id);
+    if (cartItem) {
+      setQuantity(cartItem?.quantity);
+    }
+  }, [book.id, cart]);
 
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
 
+
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
   };
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      bookId: book?.id,
+      name: book?.name,
+      thumbImage: book?.thumbImage,
+      price: book?.price,
+      discountedPrice: book?.discountPrice,
+      quantity,
+    };
+
+    dispatch(addOrUpdateCartItem(cartItem));
+    toast.success(`${book?.name} added to cart!`);
+  };
+
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -97,7 +130,7 @@ export default function ProductPage({ params }: { params: any }) {
           </div> */}
 
           <div className="flex items-baseline space-x-3">
-            <span className="text-2xl font-bold">${discountedPrice.toFixed(2)}</span>
+            <span className="text-2xl font-bold">${discountedPrice?.toFixed(2)}</span>
             <span className="text-lg  line-through">${originalPrice.toFixed(2)}</span>
           </div>
 
@@ -119,7 +152,7 @@ export default function ProductPage({ params }: { params: any }) {
                 +
               </button>
             </div>
-            <button className="flex-1 bg-white text-black rounded-md px-6 py-2  transition-colors">Buy now</button>
+            <button onClick={handleAddToCart} className="flex-1 bg-white text-black rounded-md px-6 py-2  transition-colors">Add To Cart</button>
             <button className="py-2 px-3 rounded-md bg-white text-black">
               <BsCart3 />
             </button>
