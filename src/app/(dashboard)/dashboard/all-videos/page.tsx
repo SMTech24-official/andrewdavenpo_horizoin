@@ -44,11 +44,6 @@ export default function VideoListPage() {
   };
 
   const handleDeleteConfirm = async () => {
-    // if (videoToDelete) {
-    //   setIsDeleteModalOpen(false);
-    //   setVideoToDelete(null);
-    // }
-
     try {
       const response = await deleteVideoFn(videoToDelete).unwrap();
       console.log("Video deleted", response);
@@ -62,11 +57,6 @@ export default function VideoListPage() {
       toast.error("Failed to delete video");
     }
   };
-
-  //   const handleEditClick = (video: Video) => {
-  //     setVideoToEdit(video);
-  //     setIsEditModalOpen(true);
-  //   };
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleEditSave = (updatedVideo: Video) => {
