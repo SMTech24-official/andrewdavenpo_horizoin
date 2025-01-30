@@ -12,7 +12,7 @@ const videoApi = baseApi.injectEndpoints({
           body: data,
         };
       },
-      invalidatesTags: ["Video"],
+      invalidatesTags: ["Videos"],
     }),
 
     // get all books
@@ -21,7 +21,7 @@ const videoApi = baseApi.injectEndpoints({
         url: `/videos`,
         method: "GET",
       }),
-      providesTags: ["Video"],
+      providesTags: ["Videos"],
     }),
   }),
 });

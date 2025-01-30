@@ -8,11 +8,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import EducationalResourcesCard from "../shared/EducationalResourcesCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { useGetAllVideoQuery } from "@/redux/api/videoApi";
+ interface Video {
+  id: string;
+  title: string;
+  ytVideoLink: string;
+  thumbImage: string;
+  createdAt: string; // ISO date string
+  updatedAt: string; // ISO date string
+}
 
 function EducationCardSlider() {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const [mounted, setMounted] = useState(false);
+  const { data, isLoading } = useGetAllVideoQuery(undefined)
+  const videos = data?.data || []
+
 
   useEffect(() => {
     setMounted(true);
@@ -77,9 +89,9 @@ function EducationCardSlider() {
         }}
         className="mySwiper"
       >
-        {cateGoryCards?.map((item) => (
-          <SwiperSlide key={item}>
-            <EducationalResourcesCard />
+        {videos?.map((item: Video) => (
+          <SwiperSlide key={item.id}>
+            <EducationalResourcesCard item={item} />
           </SwiperSlide>
         ))}
       </Swiper>
