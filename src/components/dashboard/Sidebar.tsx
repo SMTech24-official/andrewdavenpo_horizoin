@@ -59,6 +59,18 @@ const Sidebar = () => {
                 All Books
               </Link>
             </li>{" "}
+            <li className="flex gap-4 justify-start items-center">
+              <MdOutlineDashboard size={24} />
+              <Link
+                href={"/dashboard/add-video"}
+                className={`flex items-center  space-x-2 p-2 rounded hover:border-none w-full font-semibold 
+                  ${pathname === "/dashboard/add-video" ? "bg-white text-black" : "border border-white text-white"}
+                `}
+              >
+                {/* add-video */}
+                Add Video
+              </Link>
+            </li>{" "}
             {/* lgoout button  */}
             <li className="flex gap-4 justify-start items-center">
               <MdOutlineDashboard size={24} />

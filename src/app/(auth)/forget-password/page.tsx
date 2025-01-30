@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { useForgotPasswordMutation } from "@/redux/api/authApi";
 import { toast } from "react-toastify";
 
-export default function LoginPage() {
+export default function ForgetPassowrdPage() {
   const [forgetPasswordFn] = useForgotPasswordMutation();
 
   const [formData, setFormData] = useState({
