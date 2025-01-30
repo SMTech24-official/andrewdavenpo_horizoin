@@ -6,11 +6,16 @@ import { RxCross2 } from "react-icons/rx";
 import { usePathname } from "next/navigation";
 import { MdOutlineDashboard } from "react-icons/md";
 import { Button } from "../ui/button";
+import { useDispatch } from "react-redux";
+import { removeUser } from "@/redux/slice/usersSlice";
+import { removeFromLocalStorage } from "@/utils/local-storage";
+import { authKey } from "@/constants/authkey";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   // console.log(pathname);
+  const dispatech = useDispatch();
 
   return (
     <div className="relative">
@@ -35,72 +40,33 @@ const Sidebar = () => {
             <li className="flex gap-4 justify-start items-center">
               <MdOutlineDashboard size={24} />
               <Link
-                href={"/dashboard/all-appointments"}
-                className={`flex items-center  space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold 
-                  ${
-                    pathname === "/dashboard/all-appointments"
-                      ? "bg-white text-primary"
-                      : "border border-white text-white"
-                  }
+                href={"/dashboard/create-book"}
+                className={`flex items-center  space-x-2 p-2 rounded hover:border-none w-full font-semibold 
+                  ${pathname === "/dashboard/create-book" ? "bg-white text-black" : "border border-white text-white"}
                 `}
               >
-                All Appointments
+                Create Book
               </Link>
             </li>{" "}
             <li className="flex gap-4 justify-start items-center">
               <MdOutlineDashboard size={24} />
               <Link
-                href={"/dashboard/create-service"}
-                className={`flex items-center  space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold 
-                  ${
-                    pathname === "/dashboard/create-service"
-                      ? "bg-white text-primary"
-                      : "border border-white text-white"
-                  }
+                href={"/dashboard/all-books"}
+                className={`flex items-center  space-x-2 p-2 rounded hover:border-none w-full font-semibold 
+                  ${pathname === "/dashboard/all-books" ? "bg-white text-black" : "border border-white text-white"}
                 `}
               >
-                Create Services
+                All Books
               </Link>
             </li>{" "}
-            <li className="flex gap-4 justify-start items-center">
-              <MdOutlineDashboard size={24} />
-              <Link
-                href={"/dashboard/all-services"}
-                className={`flex items-center  space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold 
-                  ${pathname === "/dashboard/all-services" ? "bg-white text-primary" : "border border-white text-white"}
-                `}
-              >
-                All Services
-              </Link>
-            </li>
-            <li className="flex gap-4 justify-start items-center">
-              <MdOutlineDashboard size={24} />
-              <Link
-                href={"/dashboard/create-slots"}
-                className={`flex items-center  space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold 
-                  ${pathname === "/dashboard/create-slots" ? "bg-white text-primary" : "border border-white text-white"}
-                `}
-              >
-                Create Slots
-              </Link>
-            </li>{" "}
-            <li className="flex gap-4 justify-start items-center">
-              <MdOutlineDashboard size={24} />
-              <Link
-                href={"/dashboard/all-slots"}
-                className={`flex items-center  space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold 
-                  ${pathname === "/dashboard/all-slots" ? "bg-white text-primary" : "border border-white text-white"}
-                `}
-              >
-                All Slots
-              </Link>
-            </li>
             {/* lgoout button  */}
             <li className="flex gap-4 justify-start items-center">
               <MdOutlineDashboard size={24} />
               <Button
                 onClick={() => {
-                  localStorage.removeItem("accessToken");
+                  dispatech(removeUser());
+                  // localStorage.removeItem("accessToken");
+                  removeFromLocalStorage(authKey);
                   window.location.href = "/login";
                 }}
                 variant={"destructive"}

@@ -20,7 +20,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <div className="w-fit h-screen overflow-hidden overflow-y-auto">
         <Sidebar />
       </div>
-      <div className="p-4 w-full h-screen overflow-hidden overflow-y-auto">{children}</div>
+      <div className="p-4 w-full h-screen overflow-hidden overflow-y-auto bg-[#2b2f33] text-white ">{children}</div>
     </div>
   );
 };
