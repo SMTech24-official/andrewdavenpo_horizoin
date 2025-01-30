@@ -5,16 +5,31 @@ import Image from "next/image";
 import orderBook from "@/assets/orderbook.png";
 import { BsCart3 } from "react-icons/bs";
 import Subscribe from "@/components/home/Subscribe";
+import { useGetBookByIdQuery } from "@/redux/api/bookApi";
+interface IBook {
+  id: string;
+  name: string;
+  price: number;
+  discountPercent: number;
+  discountPrice: number;
+  thumbImage: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-export default function ProductPage() {
+export default function ProductPage({ params }: { params: any }) {
+  const { id } = params;
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
-
   const images = Array(4).fill(orderBook);
   const originalPrice = 190.0;
   const discountedPrice = 170.0;
   const rating = 5.0;
   const reviews = 121;
+  const { data, isLoading } = useGetBookByIdQuery(id)
+
+  const book: IBook = data?.data || {};
 
   const decreaseQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
@@ -23,6 +38,9 @@ export default function ProductPage() {
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
   };
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="container mx-auto mt-20 md:p-8">
@@ -31,21 +49,20 @@ export default function ProductPage() {
         <div className="space-y-4">
           <div className=" rounded-lg relative overflow-hidden">
             <Image
-              src={images[selectedImage]}
-              alt="English Textbook"
+              src={book.thumbImage ? book.thumbImage : images[selectedImage]}
+              alt={book.name}
               height={556}
               width={556}
               className=" max-w-[556px] h-auto p-8"
             />
           </div>
-          <div className="grid grid-cols-5 gap-2">
+          {/* <div className="grid grid-cols-5 gap-2">
             {images.map((img, idx) => (
               <button
                 key={idx}
                 onClick={() => setSelectedImage(idx)}
-                className={`aspect-square rounded-lg relative overflow-hidden ${
-                  selectedImage === idx ? "ring-2 ring-black" : ""
-                }`}
+                className={`aspect-square rounded-lg relative overflow-hidden ${selectedImage === idx ? "ring-2 ring-black" : ""
+                  }`}
               >
                 <Image
                   src={img || "/placeholder.svg"}
@@ -55,14 +72,14 @@ export default function ProductPage() {
                 />
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Product Info */}
         <div className="space-y-6 pt-[30px]">
-          <h1 className="text-[24px] font-semibold">English Textbook for Class 12</h1>
+          <h1 className="text-[24px] font-semibold">{book.name}</h1>
 
-          <div className="flex items-center space-x-2">
+          {/* <div className="flex items-center space-x-2">
             <div className="flex text-yellow-400">
               {[...Array(5)].map((_, i) => (
                 <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -73,7 +90,7 @@ export default function ProductPage() {
             <span className="text-[16px] ">
               {rating} ({reviews} Reviews)
             </span>
-          </div>
+          </div> */}
 
           <div className="flex items-baseline space-x-3">
             <span className="text-2xl font-bold">${discountedPrice.toFixed(2)}</span>
@@ -81,8 +98,7 @@ export default function ProductPage() {
           </div>
 
           <p className=" text-lg">
-            It is a long established fact that a reader will be distracted by the readable content of a page when
-            looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution.
+            {book.description}
           </p>
 
           <div className="flex space-x-4">

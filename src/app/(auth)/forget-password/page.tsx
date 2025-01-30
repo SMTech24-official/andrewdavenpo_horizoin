@@ -8,8 +8,8 @@ import { useRouter } from "next/navigation";
 import { useForgotPasswordMutation } from "@/redux/api/authApi";
 import { toast } from "react-toastify";
 
-export default function ForgetPassowrdPage() {
-  const [forgetPasswordFn] = useForgotPasswordMutation();
+export default function LoginPage() {
+  const [forgetPasswordFn, { isLoading }] = useForgotPasswordMutation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -30,7 +30,7 @@ export default function ForgetPassowrdPage() {
       toast.error("Something went wrong");
     }
 
-    route.push("/forget-password/otp");
+    route.push("/forget-password/reset-password");
   };
 
   return (
@@ -86,10 +86,11 @@ export default function ForgetPassowrdPage() {
             </div>
 
             <button
+              disabled={isLoading}
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-white text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
-              Send Otp
+              {isLoading ? "Sending Email.." : "Send Email"}
             </button>
           </form>
         </div>
