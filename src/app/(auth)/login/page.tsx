@@ -37,8 +37,8 @@ export default function LoginPage() {
   }, [userDataFromApi, dispatch]);
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "pybekece@mailinator.com",
+    password: "12345678",
     rememberMe: false,
   });
   const route = useRouter();
@@ -103,7 +103,6 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  defaultValue={"pybekece@mailinator.com"}
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -120,7 +119,6 @@ export default function LoginPage() {
                   id="password"
                   name="password"
                   type="password"
-                  defaultValue={"12345678"}
                   autoComplete="current-password"
                   required
                   value={formData.password}
