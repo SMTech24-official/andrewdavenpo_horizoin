@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useState } from "react";
 
-import { useDeleteVideoMutation, useGetAllVideoQuery } from "@/redux/api/videoApi";
 import { DeleteConfirmationModal } from "@/components/dashboard/videos/DeleteConfirmationModal";
 import { EditVideoModal } from "@/components/dashboard/videos/EditVideoModal";
-import Image from "next/image";
+import { useDeleteVideoMutation, useGetAllVideoQuery } from "@/redux/api/videoApi";
 import { Edit, Trash2 } from "lucide-react";
+import Image from "next/image";
 import { toast } from "react-toastify";
 
 interface Video {
@@ -37,7 +37,6 @@ export default function VideoListPage() {
   const [videoToDelete, setVideoToDelete] = useState<string | null>(null);
   const [videoToEdit, setVideoToEdit] = useState<Video | null>(null);
   const [deleteVideoFn, { isLoading: isDeleteLoading }] = useDeleteVideoMutation();
-
   const handleDeleteClick = (id: string) => {
     setVideoToDelete(id);
     setIsDeleteModalOpen(true);
@@ -56,12 +55,6 @@ export default function VideoListPage() {
       console.error("Failed to delete video", error);
       toast.error("Failed to delete video");
     }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleEditSave = (updatedVideo: Video) => {
-    setIsEditModalOpen(false);
-    setVideoToEdit(null);
   };
 
   if (isVideoLoading) {
@@ -125,8 +118,9 @@ export default function VideoListPage() {
         <EditVideoModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
-          onSave={handleEditSave}
           video={videoToEdit}
+          setVideoToEdit={setVideoToEdit}
+          setIsEditModalOpen={setIsEditModalOpen}
         />
       )}
     </div>
