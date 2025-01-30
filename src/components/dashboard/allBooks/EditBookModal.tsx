@@ -25,7 +25,6 @@ interface EditBookModalProps {
   isOpen: boolean;
   onClose: () => void;
   book: Book | null;
-  onSave: (editedBook: Book) => void;
 }
 
 interface BookFormInputs {
@@ -36,7 +35,7 @@ interface BookFormInputs {
   file: FileList;
 }
 
-export default function EditBookModal({ isOpen, onClose, book, onSave }: EditBookModalProps) {
+export default function EditBookModal({ isOpen, onClose, book }: EditBookModalProps) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const [updateBookMutationFunction, { isLoading: updateBookIsLoading }] = useUpdateBookMutation();
