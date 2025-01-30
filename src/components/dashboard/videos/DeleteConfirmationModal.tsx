@@ -7,12 +7,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { FaSpinner } from "react-icons/fa6";
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   confiramationText?: string;
+  isLoading?: boolean;
 }
 
 export function DeleteConfirmationModal({
@@ -20,6 +22,7 @@ export function DeleteConfirmationModal({
   onClose,
   onConfirm,
   confiramationText,
+  isLoading,
 }: DeleteConfirmationModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -37,6 +40,7 @@ export function DeleteConfirmationModal({
             Cancel
           </Button>
           <Button variant="destructive" onClick={onConfirm}>
+            {isLoading ? <FaSpinner className="h-5 w-5 mr-3" /> : null}
             Delete
           </Button>
         </DialogFooter>

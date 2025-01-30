@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useState } from "react";
 
-import { useGetAllVideoQuery } from "@/redux/api/videoApi";
 import { DeleteConfirmationModal } from "@/components/dashboard/videos/DeleteConfirmationModal";
 import { EditVideoModal } from "@/components/dashboard/videos/EditVideoModal";
-import Image from "next/image";
+import { useDeleteVideoMutation, useGetAllVideoQuery } from "@/redux/api/videoApi";
 import { Edit, Trash2 } from "lucide-react";
+import Image from "next/image";
+import { toast } from "react-toastify";
 
 interface Video {
   id: string;
@@ -35,28 +36,25 @@ export default function VideoListPage() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [videoToDelete, setVideoToDelete] = useState<string | null>(null);
   const [videoToEdit, setVideoToEdit] = useState<Video | null>(null);
-
+  const [deleteVideoFn, { isLoading: isDeleteLoading }] = useDeleteVideoMutation();
   const handleDeleteClick = (id: string) => {
     setVideoToDelete(id);
     setIsDeleteModalOpen(true);
   };
 
-  const handleDeleteConfirm = () => {
-    if (videoToDelete) {
-      setIsDeleteModalOpen(false);
-      setVideoToDelete(null);
+  const handleDeleteConfirm = async () => {
+    try {
+      const response = await deleteVideoFn(videoToDelete).unwrap();
+      console.log("Video deleted", response);
+      if (response.success) {
+        toast.success("Video deleted successfully");
+        setIsDeleteModalOpen(false);
+        setVideoToDelete(null);
+      }
+    } catch (error) {
+      console.error("Failed to delete video", error);
+      toast.error("Failed to delete video");
     }
-  };
-
-  //   const handleEditClick = (video: Video) => {
-  //     setVideoToEdit(video);
-  //     setIsEditModalOpen(true);
-  //   };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleEditSave = (updatedVideo: Video) => {
-    setIsEditModalOpen(false);
-    setVideoToEdit(null);
   };
 
   if (isVideoLoading) {
@@ -114,13 +112,15 @@ export default function VideoListPage() {
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
         onConfirm={handleDeleteConfirm}
+        isLoading={isDeleteLoading}
       />
       {videoToEdit && (
         <EditVideoModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
-          onSave={handleEditSave}
           video={videoToEdit}
+          setVideoToEdit={setVideoToEdit}
+          setIsEditModalOpen={setIsEditModalOpen}
         />
       )}
     </div>

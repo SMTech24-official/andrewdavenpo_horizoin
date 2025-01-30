@@ -83,6 +83,30 @@ const Sidebar = () => {
                 All Videos
               </Link>
             </li>{" "}
+            <li className="flex gap-4 justify-start items-center">
+              <MdOutlineDashboard size={24} />
+              <Link
+                href={"/dashboard/all-users"}
+                className={`flex items-center  space-x-2 p-2 rounded hover:border-none w-full font-semibold 
+                  ${pathname === "/dashboard/all-users" ? "bg-white text-black" : "border border-white text-white"}
+                `}
+              >
+                {/* add-video */}
+                All Users
+              </Link>
+            </li>{" "}
+            <li className="flex gap-4 justify-start items-center">
+              <MdOutlineDashboard size={24} />
+              <Link
+                href={"/dashboard/all-orders"}
+                className={`flex items-center  space-x-2 p-2 rounded hover:border-none w-full font-semibold 
+                  ${pathname === "/dashboard/all-orders" ? "bg-white text-black" : "border border-white text-white"}
+                `}
+              >
+                {/* add-video */}
+                All Orders
+              </Link>
+            </li>{" "}
             {/* lgoout button  */}
             <li className="flex gap-4 justify-start items-center">
               <MdOutlineDashboard size={24} />

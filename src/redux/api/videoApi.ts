@@ -46,7 +46,7 @@ const videoApi = baseApi.injectEndpoints({
 
     // delete video by id
     deleteVideo: build.mutation({
-      query: (id: string) => ({
+      query: (id: string | null) => ({
         url: `/videos/${id}`,
         method: "DELETE",
       }),
@@ -55,4 +55,10 @@ const videoApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateVideoMutation, useGetAllVideoQuery } = videoApi;
+export const {
+  useCreateVideoMutation,
+  useGetAllVideoQuery,
+  useGetVideoByIdQuery,
+  useUpdateVideoMutation,
+  useDeleteVideoMutation,
+} = videoApi;
