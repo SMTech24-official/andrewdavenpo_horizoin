@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -21,13 +22,16 @@ interface IBook {
 export default function ProductPage({ params }: { params: any }) {
   const { id } = params;
   const [quantity, setQuantity] = useState(1);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedImage, setSelectedImage] = useState(0);
   const images = Array(4).fill(orderBook);
   const originalPrice = 190.0;
   const discountedPrice = 170.0;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const rating = 5.0;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const reviews = 121;
-  const { data, isLoading } = useGetBookByIdQuery(id)
+  const { data, isLoading } = useGetBookByIdQuery(id);
 
   const book: IBook = data?.data || {};
 
@@ -39,7 +43,7 @@ export default function ProductPage({ params }: { params: any }) {
     setQuantity(quantity + 1);
   };
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
@@ -97,9 +101,7 @@ export default function ProductPage({ params }: { params: any }) {
             <span className="text-lg  line-through">${originalPrice.toFixed(2)}</span>
           </div>
 
-          <p className=" text-lg">
-            {book.description}
-          </p>
+          <p className=" text-lg">{book.description}</p>
 
           <div className="flex space-x-4">
             <div className="flex items-center border rounded-md">

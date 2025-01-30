@@ -9,7 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import EducationalResourcesCard from "../shared/EducationalResourcesCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { useGetAllVideoQuery } from "@/redux/api/videoApi";
- interface Video {
+interface Video {
   id: string;
   title: string;
   ytVideoLink: string;
@@ -22,9 +22,9 @@ function EducationCardSlider() {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const [mounted, setMounted] = useState(false);
-  const { data, isLoading } = useGetAllVideoQuery(undefined)
-  const videos = data?.data || []
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data, isLoading } = useGetAllVideoQuery(undefined);
+  const videos = data?.data || [];
 
   useEffect(() => {
     setMounted(true);
@@ -101,4 +101,5 @@ function EducationCardSlider() {
 
 export default EducationCardSlider;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const cateGoryCards = [0, 1, 2, 3, 4, 5, 6];

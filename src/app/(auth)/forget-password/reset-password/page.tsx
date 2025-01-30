@@ -1,30 +1,32 @@
 "use client";
 
-import { useState, useRef, type KeyboardEvent, type ChangeEvent, FormEvent, useEffect } from "react";
-import Image from "next/image";
 import student from "@/assets/student.png";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { FormEvent, useEffect, useState, type ChangeEvent } from "react";
 
-import Link from "next/link";
-import { toast } from "react-toastify";
-import { useResetPasswordMutation } from "@/redux/api/authApi";
 import { authKey } from "@/constants/authkey";
-import { useDispatch } from "react-redux";
-import { removeFromLocalStorage } from "@/utils/local-storage";
+import { useResetPasswordMutation } from "@/redux/api/authApi";
 import { removeUser } from "@/redux/slice/usersSlice";
+import { removeFromLocalStorage } from "@/utils/local-storage";
+import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function ResetPassword({ params }: { params: any }) {
   const dispatch = useDispatch();
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [resetPassword, { isLoading }] = useResetPasswordMutation()
-  const router = useRouter()
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const router = useRouter();
   const handleLogout = () => {
     removeFromLocalStorage(authKey);
     dispatch(removeUser());
@@ -32,40 +34,41 @@ export default function ResetPassword({ params }: { params: any }) {
 
   // Extract the token query param
   const searchParams = useSearchParams();
-  const token = searchParams.get('token') as string;
+  const token = searchParams.get("token") as string;
   useEffect(() => {
     if (token) {
       localStorage.setItem(authKey, token);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params?.token]);
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const handleConfirmPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(e.target.value)
-  }
+    setConfirmPassword(e.target.value);
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      toast.error('The passwords do not match. Please ensure both fields contain the same password.');
+      toast.error("The passwords do not match. Please ensure both fields contain the same password.");
       return;
     }
 
     try {
       const res = await resetPassword({ password: password }).unwrap();
       if (res?.success) {
-        handleLogout()
-        toast.success('Your password has been reset successfully.');
+        handleLogout();
+        toast.success("Your password has been reset successfully.");
         router.push("/login");
       }
       // router.push("/user/success"); // Uncomment if needed
     } catch (error) {
-      toast.error('An error occurred while resetting your password. Please try again.');
-      console.error('Password reset error:', error);
+      toast.error("An error occurred while resetting your password. Please try again.");
+      console.error("Password reset error:", error);
     }
   };
 
@@ -78,7 +81,6 @@ export default function ResetPassword({ params }: { params: any }) {
 
       {/* Right Section - OTP Form */}
       <div className="w-full md:w-1/2 flex items-center  p-8">
-
         <form onSubmit={handleSubmit} className="space-y-6 w-full">
           <div>
             <Link href="/login" className="inline-flex items-center text-sm text-white hover:text-gray-200">

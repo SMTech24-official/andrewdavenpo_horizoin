@@ -15,8 +15,9 @@ interface Video {
   updatedAt: string; // ISO date string
 }
 export default function MembersPage() {
-  const { data, isLoading } = useGetAllVideoQuery(undefined)
-  const videos = data?.data || []
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { data, isLoading } = useGetAllVideoQuery(undefined);
+  const videos = data?.data || [];
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -31,6 +32,7 @@ export default function MembersPage() {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const selectedItems = items.slice(startIndex, startIndex + itemsPerPage);
 
   return (
@@ -53,8 +55,9 @@ export default function MembersPage() {
           {Array.from({ length: totalPages }).map((_, index) => (
             <span
               key={index}
-              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${currentPage === index + 1 ? "bg-gray-300" : ""
-                } rounded`}
+              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${
+                currentPage === index + 1 ? "bg-gray-300" : ""
+              } rounded`}
             >
               {index + 1}
             </span>

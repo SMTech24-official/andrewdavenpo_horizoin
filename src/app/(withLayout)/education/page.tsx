@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
@@ -12,8 +13,8 @@ export default function EducationPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const totalPages = Math.ceil(items.length / itemsPerPage);
-  const { data, isLoading } = useGetAllVideoQuery(undefined)
-  const videos = data?.data || []
+  const { data, isLoading } = useGetAllVideoQuery(undefined);
+  const videos = data?.data || [];
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
@@ -23,10 +24,10 @@ export default function EducationPage() {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const selectedItems = items.slice(startIndex, startIndex + itemsPerPage);
   if (isLoading) {
     return <div>Loading...</div>;
-
   }
   return (
     <div>
@@ -46,8 +47,9 @@ export default function EducationPage() {
           {Array.from({ length: totalPages }).map((_, index) => (
             <span
               key={index}
-              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${currentPage === index + 1 ? "bg-gray-300" : ""
-                } rounded`}
+              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${
+                currentPage === index + 1 ? "bg-gray-300" : ""
+              } rounded`}
             >
               {index + 1}
             </span>

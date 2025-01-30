@@ -29,7 +29,7 @@ function OurShopSlider() {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
   const [mounted, setMounted] = useState(false);
-  const { data, isLoading } = useGetAllBooksQuery(undefined)
+  const { data, isLoading } = useGetAllBooksQuery(undefined);
   const books = data?.data || [];
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function OurShopSlider() {
     return null;
   }
   if (isLoading) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
   return (
     <div className="relative my-20">
@@ -141,6 +141,7 @@ function OurShopSlider() {
 
 export default OurShopSlider;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const cateGoryCards = [
   {
     id: 1,

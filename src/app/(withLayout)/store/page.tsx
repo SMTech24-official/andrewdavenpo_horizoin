@@ -1,15 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { HiOutlineShoppingCart } from "react-icons/hi";
-import books from "@/assets/home/book.png";
 import { useState } from "react";
+import { HiOutlineShoppingCart } from "react-icons/hi";
 
 import Herosection from "@/components/home/Herosection";
 import Subscribe from "@/components/home/Subscribe";
+import { useGetAllBooksQuery } from "@/redux/api/bookApi";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import { useGetAllBooksQuery } from "@/redux/api/bookApi";
 interface IBook {
   id: string;
   name: string;
@@ -23,7 +22,7 @@ interface IBook {
 }
 
 export default function ShopPage() {
-  const { data, isLoading } = useGetAllBooksQuery(undefined)
+  const { data, isLoading } = useGetAllBooksQuery(undefined);
   const books = data?.data || [];
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,9 +38,10 @@ export default function ShopPage() {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const selectedItems = books.slice(startIndex, startIndex + itemsPerPage);
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
   return (
     <div>
@@ -95,8 +95,9 @@ export default function ShopPage() {
           {Array.from({ length: totalPages }).map((_, index) => (
             <span
               key={index}
-              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${currentPage === index + 1 ? "bg-gray-300" : ""
-                } rounded`}
+              className={`h-11 flex items-center border border-gray-400 justify-center w-11 rounded-full ${
+                currentPage === index + 1 ? "bg-gray-300" : ""
+              } rounded`}
             >
               {index + 1}
             </span>

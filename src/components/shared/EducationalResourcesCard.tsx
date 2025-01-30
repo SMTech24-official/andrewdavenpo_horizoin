@@ -1,11 +1,9 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { RootState } from "@/redux/store";
 import { Play } from "lucide-react";
 import Image from "next/image";
-import cardImage from "@/assets/educatonCardImage.png";
 import Link from "next/link";
-import { getUserInfo } from "@/utils/getUserInfo";
-import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 
 interface Video {
