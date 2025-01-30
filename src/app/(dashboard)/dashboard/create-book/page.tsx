@@ -27,6 +27,7 @@ export default function CreateBook() {
     handleSubmit,
     formState: { errors },
     clearErrors,
+    reset,
   } = useForm<BookFormInputs>();
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -44,7 +45,7 @@ export default function CreateBook() {
 
     const reformedData = {
       name: data.name,
-      price: data.price,
+      price: Number(data.price).toFixed(2),
       discountPercent: data.discountPercent,
       description: data.description,
     };
@@ -59,6 +60,8 @@ export default function CreateBook() {
       const response = await createBookMutationFunction(formData).unwrap();
       if (response.success) {
         toast.success("Book created successfully");
+        reset();
+        setImagePreview(null);
       }
     } catch (error) {
       console.log(error);
@@ -79,7 +82,7 @@ export default function CreateBook() {
   };
 
   return (
-    <Card className="w-full max-w-2xl md:mt-10 mx-auto">
+    <Card className="w-full container max-w-2xl md:mt-10 mx-auto">
       <CardHeader>
         <CardTitle>Create New Book</CardTitle>
         <CardDescription>Enter the details for the new book.</CardDescription>

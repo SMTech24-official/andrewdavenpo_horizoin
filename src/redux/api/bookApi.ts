@@ -11,6 +11,7 @@ const bookApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["Books"],
     }),
     // get book by id
     getBookById: build.query({
@@ -20,6 +21,7 @@ const bookApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["Books"],
     }),
     // add book
     crateBooks: build.mutation({
