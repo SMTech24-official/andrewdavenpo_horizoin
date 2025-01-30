@@ -1,48 +1,27 @@
-"use client"
-
-import { useState } from "react"
-// import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Subscribe() {
-    const [email, setEmail] = useState("")
+  return (
+    <div className="container my-20">
+      <div className="relative rounded-lg overflow-hidden min-h-[300px] w-full bg-[#3f4145] flex flex-col items-center justify-center px-4 ">
+        {/* Decorative shapes */}
+        <div className="absolute left-0 bottom-0 w-32 h-32 bg-teal-600 rounded-full opacity-50 transform -translate-x-1/2 translate-y-1/2" />
+        <div className="absolute right-0 top-0 w-32 h-32 bg-teal-600 rounded-full opacity-50 transform translate-x-1/2 -translate-y-1/2" />
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        // TODO: Implement newsletter subscription logic
-        console.log("Subscribing email:", email)
-        setEmail("")
-    }
+        <h2 className="text-white text-3xl mb-10 font-semibold text-center  max-w-[647px]">
+          Subscribe to our Newsletter for Newest Course Updates
+        </h2>
 
-    return (
-        <div className="container mx-auto">
-            <section className="w-full  mx-auto py-[100px]">
-                <div className="bg-[#F3F2F2] rounded-[20px] p-8 md:p-12">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <h2 className="text-2xl md:text-3xl font-semibold mb-6">
-                            Subscribe to our Newsletter for Newest Course <br /> Updates
-                        </h2>
-
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-w-2xl mx-auto p-4">
-                            <div className="relative w-full">
-                                <input
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    required
-                                    className="w-full h-12 px-4 sm:px-8 border border-[#989898] rounded-[28px] bg-white"
-                                />
-                                <button
-                                    type="submit"
-                                    className="w-full sm:w-auto h-12 sm:h-9 px-8 mt-3 sm:mt-0 sm:absolute sm:top-[6px] sm:right-2 rounded-[28px] text-white bg-[#333333] hover:bg-gray-800 transition-colors duration-200"
-                                >
-                                    Subscribe!
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
+        <div className="flex px-1 flex-col max-w-[647px] sm:flex-row gap-4">
+          <Button asChild variant="secondary" className="flex sm:w-[364px] w-full py-4 justify-center items-center">
+            <Link href="/login">Login</Link>
+          </Button>
+          <Button asChild variant="secondary" className="flex sm:w-[364px] w-full py-4 justify-center items-center">
+            <Link href="/register">Register</Link>
+          </Button>
         </div>
-    )
+      </div>
+    </div>
+  );
 }

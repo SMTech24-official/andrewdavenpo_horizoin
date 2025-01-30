@@ -1,12 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import student from "@/assets/student.png";
 import { useRouter } from "next/navigation";
+import { useGetUserDataFromApiQuery, useLoginMutation } from "@/redux/api/authApi";
+import { toast } from "react-toastify";
+import setAccessToken from "@/service/actions/setAccessToken";
+import { setToLocalStorage } from "@/utils/local-storage";
+import { authKey } from "@/constants/authkey";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "@/redux/slice/usersSlice";
+import { RootState } from "@/redux/store";
 
 export default function LoginPage() {
+  const [loginMutationFn, { isLoading, data }] = useLoginMutation();
+  const { data: userDataFromApi } = useGetUserDataFromApiQuery(
+    {},
+    {
+      skip: !data?.success,
+    }
+  );
+
+  const user = useSelector((state: RootState) => state.user.user);
+
+  console.log("userDataFromApi:", userDataFromApi);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userDataFromApi) {
+      console.log("Dispatching setUser with:", userDataFromApi?.data); // Add this line
+      dispatch(setUser(userDataFromApi?.data));
+    }
+  }, [userDataFromApi, dispatch]);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,12 +43,39 @@ export default function LoginPage() {
   });
   const route = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle login logic here
     console.log("Login attempted:", formData);
-    route.push("/");
+
+    const formattedData = {
+      email: formData.email,
+      password: formData.password,
+    };
+
+    try {
+      const response = await loginMutationFn(formattedData).unwrap();
+      console.log("Response:", response);
+
+      if (response.success) {
+        toast.success("Logged in successfully");
+        setAccessToken(response.data.token);
+        setToLocalStorage(authKey, response.data.token);
+        // if (user) {
+        //   route.push("/");
+        // }
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Invalid credentials");
+    }
   };
+
+  useEffect(() => {
+    if (user) {
+      route.push("/");
+    }
+  }, [route, user]);
 
   return (
     <div className="min-h-screen flex bg-custom-gradient">
@@ -98,7 +154,7 @@ export default function LoginPage() {
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  bg-white text-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
             >
-              Login
+              {isLoading ? "Loading..." : "Login"}
             </button>
           </form>
           {/* new to here signup */}

@@ -25,19 +25,25 @@ export default function ProductPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-4 md:p-8">
+    <div className="container mx-auto mt-20 md:p-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Product Images */}
         <div className="space-y-4">
-          <div className="aspect-square bg-gray-100 rounded-lg relative overflow-hidden">
-            <Image src={images[selectedImage]} alt="English Textbook" fill className="object-contain p-8" />
+          <div className=" rounded-lg relative overflow-hidden">
+            <Image
+              src={images[selectedImage]}
+              alt="English Textbook"
+              height={556}
+              width={556}
+              className=" max-w-[556px] h-auto p-8"
+            />
           </div>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-5 gap-2">
             {images.map((img, idx) => (
               <button
                 key={idx}
                 onClick={() => setSelectedImage(idx)}
-                className={`aspect-square bg-gray-100 rounded-lg relative overflow-hidden ${
+                className={`aspect-square rounded-lg relative overflow-hidden ${
                   selectedImage === idx ? "ring-2 ring-black" : ""
                 }`}
               >
@@ -64,24 +70,24 @@ export default function ProductPage() {
                 </svg>
               ))}
             </div>
-            <span className="text-[16px] text-gray-600">
+            <span className="text-[16px] ">
               {rating} ({reviews} Reviews)
             </span>
           </div>
 
           <div className="flex items-baseline space-x-3">
             <span className="text-2xl font-bold">${discountedPrice.toFixed(2)}</span>
-            <span className="text-lg text-gray-500 line-through">${originalPrice.toFixed(2)}</span>
+            <span className="text-lg  line-through">${originalPrice.toFixed(2)}</span>
           </div>
 
-          <p className="text-[#807D7D] text-lg">
+          <p className=" text-lg">
             It is a long established fact that a reader will be distracted by the readable content of a page when
             looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution.
           </p>
 
           <div className="flex space-x-4">
             <div className="flex items-center border rounded-md">
-              <button onClick={decreaseQuantity} className="px-4 py-2 text-gray-600 hover:bg-gray-100">
+              <button onClick={decreaseQuantity} className="px-4 py-2 ">
                 −
               </button>
               <input
@@ -89,16 +95,14 @@ export default function ProductPage() {
                 min="1"
                 value={quantity}
                 onChange={(e) => setQuantity(Math.max(1, Number.parseInt(e.target.value) || 1))}
-                className="w-12 text-center border-x py-2"
+                className="w-12 text-center bg-transparent border-x py-2"
               />
-              <button onClick={increaseQuantity} className="px-4 py-2 text-gray-600 hover:bg-gray-100">
+              <button onClick={increaseQuantity} className="px-4 py-2">
                 +
               </button>
             </div>
-            <button className="flex-1 bg-[#333333] text-white rounded-md px-6 py-2 hover:bg-gray-800 transition-colors">
-              Buy now
-            </button>
-            <button className="py-2 px-3 rounded-md bg-[#c5c5c5] hover:bg-[#b3b1b1]">
+            <button className="flex-1 bg-white text-black rounded-md px-6 py-2  transition-colors">Buy now</button>
+            <button className="py-2 px-3 rounded-md bg-white text-black">
               <BsCart3 />
             </button>
           </div>
