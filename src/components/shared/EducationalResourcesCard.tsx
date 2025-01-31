@@ -27,7 +27,7 @@ export default function EducationalResourcesCard({ item }: { item: Video }) {
           alt={item.title}
           className="w-full h-[278px] object-cover"
         />
-        <div className="absolute inset-0 bg-black/60" />
+        {/* <div className="absolute inset-0 bg-black/60" /> */}
       </div>
       <CardContent className="p-4">
         <h3 className="text-white text-lg font-semibold leading-7">{item.title}</h3>
