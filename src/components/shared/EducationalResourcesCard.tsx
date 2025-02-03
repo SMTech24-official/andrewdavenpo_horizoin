@@ -33,7 +33,7 @@ export default function EducationalResourcesCard({ item }: { item: Video }) {
         <h3 className="text-white text-lg font-semibold leading-7">{item.title}</h3>
       </CardContent>
       {/* card Footer */}
-      <CardFooter className="p-0">
+      <CardFooter className="pl-4">
         <Link href={user ? item.ytVideoLink : "/login"} target={user ? "_blank" : "_self"}>
           <Button
             variant="secondary"

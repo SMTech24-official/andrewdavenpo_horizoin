@@ -91,7 +91,7 @@ function OurShopSlider() {
             centeredSlides: false,
           },
           1280: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 14,
           },
         }}
