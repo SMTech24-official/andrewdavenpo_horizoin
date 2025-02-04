@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { useRouter } from "next/router";
 import { authKey } from "@/constants/authkey";
 import setAccessToken from "@/service/actions/setAccessToken";
@@ -17,6 +17,7 @@ import { getUserInfo } from "@/utils/getUserInfo";
 import { setToLocalStorage } from "@/utils/local-storage";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { RootState } from "@/redux/store";
 
 interface FormData {
   email: string;
@@ -39,7 +40,7 @@ export default function LoginComponent() {
     }
   );
 
-  // const user = useSelector((state: RootState) => state.user.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   const dispatch = useDispatch();
 
@@ -52,6 +53,11 @@ export default function LoginComponent() {
   const route = useRouter();
 
   const onSubmit = async (formData: FormData) => {
+    if (user) {
+      toast.error("You are already logged in");
+      return;
+    }
+
     setIsLoading(true);
     try {
       const response = await loginMutationFn(formData).unwrap();
