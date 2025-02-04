@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Herosection from "@/components/home/Herosection";
 // import Subscribe from "@/components/home/Subscribe";
 import EducationalResourcesCard from "@/components/shared/EducationalResourcesCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useGetAllVideoQuery } from "@/redux/api/videoApi";
 import heroSectionImage from "@/assets/young-people-celebrating-youth-day (1) 1.png";
+import { getUserInfo } from "@/utils/getUserInfo";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 interface Video {
   id: string;
   title: string;
@@ -16,25 +19,38 @@ interface Video {
   updatedAt: string; // ISO date string
 }
 export default function MembersPage() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data, isLoading } = useGetAllVideoQuery(undefined);
+  const { data, isLoading, error } = useGetAllVideoQuery(undefined);
+
+  const router = useRouter();
+
+  const user = getUserInfo();
+
   const videos = data?.data || [];
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const totalPages = Math.ceil(items.length / itemsPerPage);
 
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
+  const totalPages = Math.ceil(videos.length / itemsPerPage);
 
   const handlePreviousPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
 
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+
   const startIndex = (currentPage - 1) * itemsPerPage;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const selectedItems = items.slice(startIndex, startIndex + itemsPerPage);
+  const currentVideos = videos.slice(startIndex, startIndex + itemsPerPage);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+      toast.error("You need to login first");
+    }
+  }, [router, user]);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Something went wrong..</div>;
 
   return (
     <div>
@@ -47,7 +63,7 @@ export default function MembersPage() {
 
       <div className="container mx-auto pt-[40px] pb-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {videos?.map((item: Video) => (
+          {currentVideos?.map((item: Video) => (
             <EducationalResourcesCard item={item} key={item.id} />
           ))}
         </div>
@@ -56,8 +72,7 @@ export default function MembersPage() {
             <FaArrowLeft />
           </button>
 
-          {/* rounded page numger */}
-
+          {/* rounded page number */}
           {Array.from({ length: totalPages }).map((_, index) => (
             <span
               key={index}

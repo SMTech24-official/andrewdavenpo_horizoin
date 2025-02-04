@@ -14,6 +14,7 @@ type FormData = {
   title: string;
   ytVideoLink: string;
   file: FileList;
+  description: string;
 };
 
 export default function AddVideo() {
@@ -23,6 +24,7 @@ export default function AddVideo() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>();
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -40,6 +42,7 @@ export default function AddVideo() {
     const reformedData = {
       title: data.title,
       ytVideoLink: data.ytVideoLink,
+      description: data.description,
     };
 
     formData.append("data", JSON.stringify(reformedData));
@@ -53,6 +56,9 @@ export default function AddVideo() {
       if (response) {
         console.log("Video added successfully");
         toast.success("Video added successfully");
+        // clear the form
+        setPreviewUrl(null);
+        reset();
       }
     } catch (error) {
       console.log(error);
@@ -93,6 +99,18 @@ export default function AddVideo() {
               placeholder="Enter YouTube video link"
             />
             {errors.ytVideoLink && <p className="text-red-500 text-sm mt-1">{errors.ytVideoLink.message}</p>}
+          </div>
+
+          {/* description section */}
+
+          <div>
+            <Label htmlFor="description">Description</Label>
+            <textarea
+              id="description"
+              {...register("description")}
+              placeholder="Enter video description"
+              className="w-full p-3 mt-1 border border-gray-300 rounded-md"
+            />
           </div>
 
           <div>

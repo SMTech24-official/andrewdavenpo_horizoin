@@ -13,6 +13,7 @@ import { authKey } from "@/constants/authkey";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slice/usersSlice";
 import { RootState } from "@/redux/store";
+import { getUserInfo } from "@/utils/getUserInfo";
 
 export default function LoginPage() {
   const [loginMutationFn, { isLoading, data }] = useLoginMutation();
@@ -25,20 +26,20 @@ export default function LoginPage() {
 
   const user = useSelector((state: RootState) => state.user.user);
 
-  console.log("userDataFromApi:", userDataFromApi);
+  // console.log("userDataFromApi:", userDataFromApi);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (userDataFromApi) {
-      console.log("Dispatching setUser with:", userDataFromApi?.data); // Add this line
+      // console.log("Dispatching setUser with:", userDataFromApi?.data); // Add this line
       dispatch(setUser(userDataFromApi?.data));
     }
   }, [userDataFromApi, dispatch]);
 
   const [formData, setFormData] = useState({
-    email: "pybekece@mailinator.com",
-    password: "12345678",
+    email: "admin@gmail.com",
+    password: "hashedpassword123",
     rememberMe: false,
   });
   const route = useRouter();
@@ -46,7 +47,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle login logic here
-    console.log("Login attempted:", formData);
+    // console.log("Login attempted:", formData);
 
     const formattedData = {
       email: formData.email,
@@ -55,12 +56,17 @@ export default function LoginPage() {
 
     try {
       const response = await loginMutationFn(formattedData).unwrap();
-      console.log("Response:", response);
+
+      // console.log("Response:", response);
 
       if (response.success) {
         toast.success("Logged in successfully");
         setAccessToken(response.data.token);
         setToLocalStorage(authKey, response.data.token);
+        // const user = getUserInfo();
+
+        // console.log(user);
+
         // if (user) {
         //   route.push("/");
         // }
@@ -73,7 +79,15 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (user) {
-      route.push("/");
+      // route.push("/");
+      const userFormToken = getUserInfo();
+      console.log(userFormToken);
+
+      if (userFormToken?.role === "SUPER_ADMIN") {
+        route.push("/dashboard");
+      } else {
+        route.push("/");
+      }
     }
   }, [route, user]);
 

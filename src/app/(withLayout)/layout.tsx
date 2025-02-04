@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 
 const CommonLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div>
+    <div className="grid grid-rows-[1fr_auto] min-h-screen">
       {<Navbar />}
       <div className="">{children}</div>
       {<Footer />}
