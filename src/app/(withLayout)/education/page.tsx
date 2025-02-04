@@ -12,10 +12,11 @@ import heroSectonImage from "@/assets/black-white-portrait-digital-nomads 1.png"
 export default function EducationPage() {
   const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
-  const items = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const totalPages = Math.ceil(items.length / itemsPerPage);
+
   const { data, isLoading } = useGetAllVideoQuery(undefined);
   const videos = data?.data || [];
+  const totalPages = Math.ceil(videos.length / itemsPerPage);
+
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
@@ -25,8 +26,8 @@ export default function EducationPage() {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const selectedItems = items.slice(startIndex, startIndex + itemsPerPage);
+  const currentVideos = videos.slice(startIndex, startIndex + itemsPerPage);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -40,7 +41,7 @@ export default function EducationPage() {
       />
       <div className="container mx-auto pt-[40px] pb-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {videos?.map((item: any) => (
+          {currentVideos?.map((item: any) => (
             <EducationalResourcesCard item={item} key={item?.id} />
           ))}
         </div>
@@ -49,7 +50,7 @@ export default function EducationPage() {
             <FaArrowLeft />
           </button>
 
-          {/* rounded page numger */}
+          {/* rounded page number */}
           {Array.from({ length: totalPages }).map((_, index) => (
             <span
               key={index}
