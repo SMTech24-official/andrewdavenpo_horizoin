@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Herosection
-        heading={"Start your peptide journey to better health here."}
+        heading={"Find Everything You Need in One Place"}
         subHeading={""}
         actions={true}
         heroImg={homeHeroImage.src}
