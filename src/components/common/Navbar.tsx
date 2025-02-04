@@ -47,25 +47,12 @@ export default function Navbar() {
   };
 
   return (
-    <div
-      className={`absolute w-full top-0 left-0 z-50 ${scroll ? "bg-custom-gradient sticky" : "lg:bg-transparent bg-custom-gradient"
-        } `}
-    >
-      <div className="container mx-auto py-4 px-4 md:px-8">
+    <div className={`absolute bg-black w-full  top-0 left-0 z-50 ${scroll ? "sticky" : ""} `}>
+      <div className="container mx-auto py-4 px-4 md:px-8 bg-black">
         {/* Desktop View */}
-        <div className="hidden lg:flex justify-between items-center bg-custom-gradient">
+        <div className="hidden lg:flex justify-between items-center  ">
           <Link href="/">
-            <Image
-              style={{
-                // make the image white
-                filter: "invert(1)",
-              }}
-              src={logo}
-              width={206}
-              height={30}
-              alt="logo"
-              className="w-[206px] cursor-pointer"
-            />
+            <Image src={logo} width={206} height={30} alt="logo" className="w-[206px] cursor-pointer" />
           </Link>
 
           {/* Desktop Menu */}
@@ -133,8 +120,9 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`transition-transform  bg-custom-gradient duration-300 overflow-hidden lg:hidden ${isMobileMenuOpen ? "mt-4" : "hidden"
-            }`}
+          className={`transition-transform  bg-custom-gradient duration-300 overflow-hidden lg:hidden ${
+            isMobileMenuOpen ? "mt-4" : "hidden"
+          }`}
         >
           <ul className=" text-[18px] flex flex-col gap-4 p-4">
             <li className="cursor-pointer font-medium">

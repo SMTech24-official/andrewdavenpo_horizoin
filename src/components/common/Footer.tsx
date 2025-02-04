@@ -27,9 +27,6 @@ export default function Footer() {
               className="w-[206px]"
               alt="logo"
               // make the image white
-              style={{
-                filter: "invert(100%)",
-              }}
             />
           </Link>
           <p className="max-w-[864px]  pt-[18px] pb-[24px] text-center">
