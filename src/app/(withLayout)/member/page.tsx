@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Herosection from "@/components/home/Herosection";
 // import Subscribe from "@/components/home/Subscribe";
 import EducationalResourcesCard from "@/components/shared/EducationalResourcesCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useGetAllVideoQuery } from "@/redux/api/videoApi";
 import heroSectionImage from "@/assets/young-people-celebrating-youth-day (1) 1.png";
+import { getUserInfo } from "@/utils/getUserInfo";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 interface Video {
   id: string;
   title: string;
@@ -17,6 +20,10 @@ interface Video {
 }
 export default function MembersPage() {
   const { data, isLoading, error } = useGetAllVideoQuery(undefined);
+
+  const router = useRouter();
+
+  const user = getUserInfo();
 
   const videos = data?.data || [];
   const itemsPerPage = 8;
@@ -34,6 +41,13 @@ export default function MembersPage() {
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentVideos = videos.slice(startIndex, startIndex + itemsPerPage);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+      toast.error("You need to login first");
+    }
+  }, [router, user]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Something went wrong..</div>;
