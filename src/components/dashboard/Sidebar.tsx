@@ -11,6 +11,7 @@ import { removeUser } from "@/redux/slice/usersSlice";
 import { removeFromLocalStorage } from "@/utils/local-storage";
 import { authKey } from "@/constants/authkey";
 import { FaVideo } from "react-icons/fa6";
+import { Home } from "lucide-react";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -107,21 +108,37 @@ const Sidebar = () => {
             </ul>
           </nav>
         </div>
-        <div className="flex gap-4 justify-start items-center">
-          <MdLogout size={24} />
-          <Button
-            onClick={() => {
-              dispatech(removeUser());
-              removeFromLocalStorage(authKey);
-              window.location.href = "/login";
-            }}
-            variant={"destructive"}
-            className={`flex items-center  space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold 
+        <div className="flex flex-col gap-4">
+          <div className="flex gap-4 justify-start items-center">
+            <Home size={24} />
+            <Button
+              onClick={() => {
+                dispatech(removeUser());
+                removeFromLocalStorage(authKey);
+                window.location.href = "/";
+              }}
+              variant={"ghost"}
+              className={`flex items-center  border space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold`}
+            >
+              Go Home
+            </Button>
+          </div>
+          <div className="flex gap-4 justify-start items-center">
+            <MdLogout size={24} />
+            <Button
+              onClick={() => {
+                dispatech(removeUser());
+                removeFromLocalStorage(authKey);
+                window.location.href = "/login";
+              }}
+              variant={"destructive"}
+              className={`flex items-center  space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold 
                   ${pathname === "/dashboard/logout" ? "bg-white text-primary" : "border border-white text-white"}
                 `}
-          >
-            Logout
-          </Button>
+            >
+              Logout
+            </Button>
+          </div>
         </div>
       </div>
 
