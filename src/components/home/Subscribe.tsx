@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import LoginComponent from "./LoginComponent";
 
 export default function Subscribe() {
   return (
-    <div className="container my-20">
-      <div className="relative rounded-lg overflow-hidden min-h-[300px] w-full bg-[#3f4145] flex flex-col items-center justify-center px-4 ">
-        {/* Decorative shapes */}
+    <div className="">
+      {/* <div className="relative rounded-lg overflow-hidden min-h-[300px] w-full bg-[#3f4145] flex flex-col items-center justify-center px-4 ">
         <div className="absolute left-0 bottom-0 w-32 h-32 bg-teal-600 rounded-full opacity-50 transform -translate-x-1/2 translate-y-1/2" />
         <div className="absolute right-0 top-0 w-32 h-32 bg-teal-600 rounded-full opacity-50 transform translate-x-1/2 -translate-y-1/2" />
 
@@ -21,7 +19,8 @@ export default function Subscribe() {
             <Link href="/register">Register</Link>
           </Button>
         </div>
-      </div>
+      </div> */}
+      <LoginComponent />
     </div>
   );
 }
