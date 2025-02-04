@@ -45,7 +45,7 @@ export default function ShopPage() {
   }
   return (
     <div>
-      <Herosection />
+      <Herosection heading="" subHeading="" heroImg=""  />
 
       <div className="container mx-auto pt-[40px] pb-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
