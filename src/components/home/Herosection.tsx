@@ -1,23 +1,29 @@
 "use client";
 import Image from "next/image";
-import heroImg from "@/assets/home/hero_girl.png";
-import barnnerImage from "@/assets/Hero-section.png";
+// import heroImg from "@/assets/home/hero_girl.png";
+// import barnnerImage from "@/assets/Hero-section.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Herosection() {
+interface HeroSectionProps {
+  heroImg: {
+    src: string;
+  };
+}
+
+export default function Herosection({ heroImg }: HeroSectionProps) {
   const pathname = usePathname();
 
   return (
     <div
-      className="pt-20"
-      // background image
-      style={{
-        backgroundImage: `url(${barnnerImage.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="pt-20  bg-black"
+      // // background image
+      // style={{
+      //   backgroundImage: `url(${barnnerImage.src})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   backgroundRepeat: "no-repeat",
+      // }}
     >
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 items-center justify-between">
@@ -62,7 +68,7 @@ export default function Herosection() {
           )}
 
           <div className="flex justify-end">
-            <Image src={heroImg} width={392} height={648} alt="heroImg" />
+            <Image src={heroImg.src} width={392} height={648} alt="heroImg" />
           </div>
         </div>
       </div>
