@@ -7,6 +7,7 @@ import Subscribe from "@/components/home/Subscribe";
 import EducationalResourcesCard from "@/components/shared/EducationalResourcesCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useGetAllVideoQuery } from "@/redux/api/videoApi";
+import heroSectonImage from "@/assets/black-white-portrait-digital-nomads 1.png";
 
 export default function EducationPage() {
   const itemsPerPage = 8;
@@ -31,7 +32,12 @@ export default function EducationPage() {
   }
   return (
     <div>
-      <Herosection />
+      <Herosection
+        heading="Educational Resources"
+        subHeading="Explore the Most Popular Courses on YouTube and Start Learning Today!"
+        heroImg={heroSectonImage.src}
+        overlay={true}
+      />
       <div className="container mx-auto pt-[40px] pb-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {videos?.map((item: any) => (
