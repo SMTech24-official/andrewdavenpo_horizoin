@@ -9,6 +9,7 @@ import Subscribe from "@/components/home/Subscribe";
 import { useGetAllBooksQuery } from "@/redux/api/bookApi";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import heroSectonImage from "@/assets/image 39.png";
 interface IBook {
   id: string;
   name: string;
@@ -45,7 +46,12 @@ export default function ShopPage() {
   }
   return (
     <div>
-      <Herosection heading="" subHeading="" heroImg=""  />
+      <Herosection
+        heading="Our Shop"
+        subHeading="Find Everything You Need in One Place"
+        heroImg={heroSectonImage.src}
+        overlay={true}
+      />
 
       <div className="container mx-auto pt-[40px] pb-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
