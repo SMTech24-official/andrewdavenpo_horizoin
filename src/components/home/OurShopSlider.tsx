@@ -25,7 +25,7 @@ function OurShopSlider() {
     return <p>Loading...</p>;
   }
   return (
-    <div className="relative my-20">
+    <div className="relative mt-20">
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
         {books?.slice(0, 3)?.map((book: IBook) => (
           <div key={book?.id}>

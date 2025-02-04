@@ -113,8 +113,8 @@ const Sidebar = () => {
             <Home size={24} />
             <Button
               onClick={() => {
-                dispatech(removeUser());
-                removeFromLocalStorage(authKey);
+                // dispatech(removeUser());
+                // removeFromLocalStorage(authKey);
                 window.location.href = "/";
               }}
               variant={"ghost"}

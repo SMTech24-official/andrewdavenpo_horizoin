@@ -8,7 +8,7 @@ export default function Education() {
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-[38px] font-bold  mb-2">Educational Resources</h1>
-          <p className="text-lg ">Explore the Most Popular Courses on YouTube and Start Learning Today!</p>
+          <p className="text-lg ">Discover new products and how they will change your health.</p>
         </div>
 
         <div>
