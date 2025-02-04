@@ -6,6 +6,7 @@ import Herosection from "@/components/home/Herosection";
 import EducationalResourcesCard from "@/components/shared/EducationalResourcesCard";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { useGetAllVideoQuery } from "@/redux/api/videoApi";
+import heroSectionImage from "@/assets/young-people-celebrating-youth-day (1) 1.png";
 interface Video {
   id: string;
   title: string;
@@ -37,7 +38,12 @@ export default function MembersPage() {
 
   return (
     <div>
-      <Herosection />
+      <Herosection
+        heroImg={heroSectionImage.src}
+        heading="Member Area"
+        subHeading="Only for our special member"
+        overlay={true}
+      />
 
       <div className="container mx-auto pt-[40px] pb-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
