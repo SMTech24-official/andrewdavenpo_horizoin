@@ -4,18 +4,18 @@ import logo from "@/assets/logo.png";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { BiLogoInstagramAlt } from "react-icons/bi";
 import { BsTwitterX } from "react-icons/bs";
-import footerImage from "@/assets/footer-bg.png";
+// import footerImage from "@/assets/footer-bg.png";
 
 export default function Footer() {
   return (
     <div
-      className=""
-      style={{
-        backgroundImage: `url(${footerImage.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+      className="bg-black"
+      // style={{
+      //   backgroundImage: `url(${footerImage.src})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   backgroundRepeat: "no-repeat",
+      // }}
     >
       <div className="container mx-auto">
         <div className="py-[48px] text-center flex flex-col items-center">
