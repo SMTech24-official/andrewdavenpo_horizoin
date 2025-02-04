@@ -6,9 +6,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface HeroSectionProps {
-  heroImg: {
-    src: string;
-  };
+  heroImg: string;
+  actions?: boolean;
+  subHeading?: string;
+  heading: string;
 }
 
 export default function Herosection({ heroImg }: HeroSectionProps) {
@@ -68,7 +69,7 @@ export default function Herosection({ heroImg }: HeroSectionProps) {
           )}
 
           <div className="flex justify-end">
-            <Image src={heroImg.src} width={392} height={648} alt="heroImg" />
+            <Image src={heroImg} width={392} height={648} alt="heroImg" />
           </div>
         </div>
       </div>
