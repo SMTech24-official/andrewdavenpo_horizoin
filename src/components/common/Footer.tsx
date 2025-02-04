@@ -1,9 +1,9 @@
+import logo from "@/assets/logo.png";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/assets/logo.png";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { BiLogoInstagramAlt } from "react-icons/bi";
-import { BsTwitterX } from "react-icons/bs";
+import { BsTiktok } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
 // import footerImage from "@/assets/footer-bg.png";
 
 export default function Footer() {
@@ -51,18 +51,18 @@ export default function Footer() {
             </li>
           </ul>
           <div className="flex gap-[12px] justify-center pt-[24px]">
-            <Link href={"/"} className="p-[11px] bg-white hover:bg-slate-100 transition-all rounded-[8px]">
+            <Link href={"#"} className="p-[11px] bg-white hover:bg-slate-100 transition-all rounded-[8px]">
               <FaFacebookF className="text-bg_primary text-[20px] " />
             </Link>
-            <Link href={"/"} className="p-[11px] bg-white hover:bg-slate-100 transition-all rounded-[8px]">
+            <Link href={"#"} className="p-[11px] bg-white hover:bg-slate-100 transition-all rounded-[8px]">
               <BiLogoInstagramAlt className="text-bg_primary text-[20px] " />
             </Link>
-            <Link href={"/"} className="p-[11px] bg-white hover:bg-slate-100 transition-all rounded-[8px]">
-              <BsTwitterX className="text-bg_primary text-[20px] " />
+            <Link href={"#"} className="p-[11px] bg-white hover:bg-slate-100 transition-all rounded-[8px]">
+              <BsTiktok className="text-bg_primary text-[20px] " />
             </Link>
-            <Link href={"/"} className="p-[11px] bg-white hover:bg-slate-100 transition-all rounded-[8px]">
+            {/* <Link href={"/"} className="p-[11px] bg-white hover:bg-slate-100 transition-all rounded-[8px]">
               <FaLinkedinIn className="text-bg_primary text-[20px] " />
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
