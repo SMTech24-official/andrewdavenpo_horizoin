@@ -12,12 +12,12 @@ interface HeroSectionProps {
   heading: string;
 }
 
-export default function Herosection({ heroImg }: HeroSectionProps) {
+export default function Herosection({ heroImg, heading, subHeading, actions }: HeroSectionProps) {
   const pathname = usePathname();
 
   return (
     <div
-      className="pt-20  bg-black"
+      className="pt-28 pb-20  bg-black"
       // // background image
       // style={{
       //   backgroundImage: `url(${barnnerImage.src})`,
@@ -30,26 +30,24 @@ export default function Herosection({ heroImg }: HeroSectionProps) {
         <div className="grid lg:grid-cols-2 items-center justify-between">
           {pathname === "/" ? (
             <div>
-              <h2 className="font-bold text-5xl text-white leading-[62px] pb-4">
-                Explore, Learn, Shop at
-                <br />
-                Event Horizon!
-              </h2>
-              <p className="text-white text-[20px]">Discover new skills and exclusive products in one place.</p>
-              <div className="flex gap-6 pt-10">
-                <Link
-                  href={"/"}
-                  className="py-[10px] border-2 px-[20px] rounded-[8px] bg-white text-[18px] text-black  transition-all"
-                >
-                  Explore more
-                </Link>
-                <Link
-                  href={"/"}
-                  className="py-[10px] px-[20px] rounded-[8px]  text-[18px] border-2  border-white bg-transparent text-white transition-all"
-                >
-                  Shop Now
-                </Link>
-              </div>
+              <h2 className="font-bold text-5xl text-white leading-[62px] pb-4">{heading}</h2>
+              {subHeading && <p className="text-white text-[20px]">{subHeading}</p>}
+              {actions && (
+                <div className="flex gap-6 pt-10">
+                  <Link
+                    href={"/"}
+                    className="py-[10px] border-2 px-[20px] rounded-[8px] bg-white text-[18px] text-black  transition-all"
+                  >
+                    Explore more
+                  </Link>
+                  <Link
+                    href={"/"}
+                    className="py-[10px] px-[20px] rounded-[8px]  text-[18px] border-2  border-white bg-transparent text-white transition-all"
+                  >
+                    Shop Now
+                  </Link>
+                </div>
+              )}
             </div>
           ) : pathname === "/education" ? (
             <div>

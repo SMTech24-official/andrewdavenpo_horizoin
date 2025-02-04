@@ -8,7 +8,12 @@ import homeHeroImage from "@/assets/image 38.png";
 export default function Home() {
   return (
     <>
-      <Herosection heading={""} subHeading={""} actions={true} heroImg={homeHeroImage.src} />
+      <Herosection
+        heading={"Start your peptide journey to better health here."}
+        subHeading={""}
+        actions={true}
+        heroImg={homeHeroImage.src}
+      />
       <WhoAreYou />
       <Education />
       <Shop />
