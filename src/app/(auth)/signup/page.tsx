@@ -44,19 +44,6 @@ export default function LoginPage() {
     try {
       const response = await signupMutationFunction(formattedData).unwrap();
       console.log("Response:", response);
-      //   {
-      //     "success": true,
-      //     "message": "User Registered successfully!",
-      //     "data": {
-      //         "id": "679a2c95fb68c13d6075513f",
-      //         "firstName": "Ahmed",
-      //         "lastName": "Hunter",
-      //         "email": "nyducixi@mailinator.com",
-      //         "role": "USER",
-      //         "createdAt": "2025-01-29T13:26:45.500Z",
-      //         "updatedAt": "2025-01-29T13:26:45.500Z"
-      //     }
-      // }
 
       if (response.success) {
         // Redirect user to login page
