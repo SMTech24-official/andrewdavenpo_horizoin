@@ -1,6 +1,6 @@
 "use client";
 
-import student from "@/assets/student.png";
+import student from "@/assets/auth.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -39,7 +39,7 @@ export default function ResetPassword({ params }: { params: any }) {
     if (token) {
       localStorage.setItem(authKey, token);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params?.token]);
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -73,15 +73,15 @@ export default function ResetPassword({ params }: { params: any }) {
   };
 
   return (
-    <div className="min-h-screen flex bg-custom-gradient">
+    <div className="min-h-screen gap-12 container flex ">
       {/* Left Section - Image */}
-      <div className="hidden md:flex md:w-1/2 relative ">
-        <Image src={student} alt="Person using laptop" fill className="object-cover" priority />
+      <div className="hidden md:flex h-[552] w-[671]">
+        <Image src={student} alt="Person using laptop" width={1000} height={1000} />
       </div>
 
       {/* Right Section - OTP Form */}
-      <div className="w-full md:w-1/2 flex items-center  p-8">
-        <form onSubmit={handleSubmit} className="space-y-6 w-full">
+      <div className=" w-full  flex items-center justify-center p-8">
+        <form onSubmit={handleSubmit} className="gap-6 flex flex-col w-full">
           <div>
             <Link href="/login" className="inline-flex items-center text-sm text-white hover:text-gray-200">
               <svg
