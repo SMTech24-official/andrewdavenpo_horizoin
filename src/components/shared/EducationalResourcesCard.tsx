@@ -43,14 +43,16 @@ export default function EducationalResourcesCard({ item }: { item: Video }) {
         </p>
       </CardContent>
       {/* card Footer */}
-      <CardFooter className="pl-4">
-        <Link href={user ? item.ytVideoLink : "/login"} target={user ? "_blank" : "_self"}>
-          <Button variant="secondary" className="inline-flex py-2.5 px-5 justify-center items-center gap-2.5">
-            {/* <Play className="w-4 h-4 mr-2" /> */}
-            {user ? "Watch now" : "Login to Watch"}
-          </Button>
-        </Link>
-      </CardFooter>
+      {user && (
+        <CardFooter className="pl-4">
+          <Link href={user ? item.ytVideoLink : "/login"} target={user ? "_blank" : "_self"}>
+            <Button variant="secondary" className="inline-flex py-2.5 px-5 justify-center items-center gap-2.5">
+              {/* <Play className="w-4 h-4 mr-2" /> */}
+              {user && "Watch now"}
+            </Button>
+          </Link>
+        </CardFooter>
+      )}
     </Card>
   );
 }
