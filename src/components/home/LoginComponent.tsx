@@ -108,7 +108,7 @@ export default function LoginComponent() {
 
         <div className="space-y-6 bg-[#424448] p-5 rounded-md">
           <div className="space-y-2">
-            <h2 className="text-2xl text-white font-medium">Login to view premium videos</h2>
+            <h2 className="text-2xl text-white font-medium">Subscribe / Longevity</h2>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-[#424448]">
