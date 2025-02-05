@@ -9,7 +9,7 @@ import Subscribe from "@/components/home/Subscribe";
 import { useGetAllBooksQuery } from "@/redux/api/bookApi";
 import Link from "next/link";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import heroSectonImage from "@/assets/image 39.png";
+import heroSectonImage from "@/assets/side-view-attractive-hispanic-software-developer-programming-using-computer-while-working-from-home 1.png";
 interface IBook {
   id: string;
   name: string;

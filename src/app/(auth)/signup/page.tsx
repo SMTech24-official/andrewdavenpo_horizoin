@@ -4,7 +4,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import student from "@/assets/student.png";
+import student from "@/assets/auth.png";
 import { useSignupMutation } from "@/redux/api/authApi";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -57,14 +57,14 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-custom-gradient">
+    <div className="min-h-screen container flex ">
       {/* Left Section - Image */}
-      <div className="hidden md:flex md:w-1/2 relative">
-        <Image src={student} alt="Person using laptop" fill className="object-cover" priority />
+      <div className="hidden md:flex h-[552] w-[671]">
+        <Image src={student} alt="Person using laptop" width={1000} height={1000} />
       </div>
 
       {/* Right Section - Login Form */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+      <div className="w-full   flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center">
             <h1 className="text-2xl font-semibold ">Create New Account</h1>

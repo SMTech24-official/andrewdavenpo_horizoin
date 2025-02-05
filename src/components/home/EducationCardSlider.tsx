@@ -31,7 +31,7 @@ function EducationCardSlider() {
   }
 
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-10 my-20">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  gap-10 my-10">
       {videos?.slice(0, 3)?.map((item: Video) => (
         <SwiperSlide key={item.id}>
           <EducationalResourcesCard item={item} />
