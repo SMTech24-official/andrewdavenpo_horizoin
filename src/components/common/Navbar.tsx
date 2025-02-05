@@ -142,7 +142,7 @@ export default function Navbar() {
             </li>
             <li className="cursor-pointer font-medium">
               <Link href="/member" onClick={() => setIsMobileMenuOpen(false)}>
-                Subscribe
+                Subscribe / Longevity
               </Link>
             </li>
             <div className="flex items-center justify-center gap-4 mt-4">
