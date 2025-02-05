@@ -67,7 +67,7 @@ export default function Navbar() {
               <Link href="/store">Store</Link>
             </li>
             <li className="cursor-pointer font-medium">
-              <Link href="/member">Subscribe</Link>
+              <Link href="/member">Subscribe / Longevity</Link>
             </li>
           </ul>
 
