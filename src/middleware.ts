@@ -13,6 +13,10 @@ const AdminRoutes = ["/dashboard/:path*"];
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname === "/") {
+    return NextResponse.next();
+  }
+
   // Get the token from cookies
   const accessToken = (await cookies()).get(authKey)?.value;
   console.log(accessToken);
