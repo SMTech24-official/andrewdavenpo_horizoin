@@ -67,7 +67,9 @@ export default function LoginComponent() {
         await setAccessToken(response.data.token);
         setToLocalStorage(authKey, response.data.token);
 
-        const userFormToken = getUserInfo();
+        const userFormToken = await getUserInfo();
+
+        console.log("User from token:", userFormToken);
         if (userFormToken?.role === "SUPER_ADMIN" || userFormToken?.role === "ADMIN") {
           route.push("/dashboard");
         } else {
