@@ -120,7 +120,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`transition-transform  bg-custom-gradient duration-300 overflow-hidden lg:hidden ${
+          className={`transition-transform  bg-black duration-300 overflow-hidden lg:hidden ${
             isMobileMenuOpen ? "mt-4" : "hidden"
           }`}
         >
