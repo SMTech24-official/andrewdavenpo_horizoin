@@ -18,7 +18,6 @@ import { setToLocalStorage } from "@/utils/local-storage";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { RootState } from "@/redux/store";
-import { UserRole } from "@/types/common";
 
 interface FormData {
   email: string;
@@ -65,14 +64,11 @@ export default function LoginComponent() {
 
       if (response.success) {
         toast.success("Logged in successfully");
-        setAccessToken(response.data.token);
+        await setAccessToken(response.data.token);
         setToLocalStorage(authKey, response.data.token);
 
         const userFormToken = getUserInfo();
-        if (
-          (userFormToken?.role as unknown as UserRole) === UserRole.SUPER_ADMIN ||
-          (userFormToken?.role as unknown as UserRole) === UserRole.ADMIN
-        ) {
+        if (userFormToken?.role === "SUPER_ADMIN" || userFormToken?.role === "ADMIN") {
           route.push("/dashboard");
         } else {
           route.push("/");
