@@ -1,15 +1,15 @@
 "use client";
 import logo from "@/assets/logo.png";
+import { removeUser } from "@/redux/slice/usersSlice";
+import { RootState } from "@/redux/store";
+import { logoutUser } from "@/service/actions/logoutUser";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CartSidebar } from "../shared/CartSidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { CartSidebar } from "../shared/CartSidebar";
 import { Button } from "../ui/button";
-import { removeFromLocalStorage } from "@/utils/local-storage";
-import { authKey } from "@/constants/authkey";
-import { removeUser } from "@/redux/slice/usersSlice";
 // import { FiMenu, FiX } from 'react-icons/fi';
 // import { HiOutlineMenuAlt3, HiX } from "react-icons/hi";
 
@@ -17,6 +17,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   // get user from redux store
 
@@ -41,8 +42,9 @@ export default function Navbar() {
     };
   }, []);
 
-  const handleLogout = () => {
-    removeFromLocalStorage(authKey);
+  const handleLogout = async () => {
+    // removeFromLocalStorage(authKey);
+    await logoutUser(router);
     dispatch(removeUser());
   };
 
