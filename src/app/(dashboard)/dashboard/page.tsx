@@ -17,7 +17,7 @@ export default function WelcomePage() {
         <CardContent className="space-y-4">
           <p className="text-center text-gray-600">Thank you for logging in. We&apos;re glad to have you back.</p>
           <div className="flex justify-center">
-            <Link href={"/dashboard/all-appointments"}>
+            <Link href={"/dashboard/all-books"}>
               <Button className="bg-gray-600 hover:bg-gray-700">
                 <Calendar className="mr-2 h-4 w-4" /> Exprlore
               </Button>
