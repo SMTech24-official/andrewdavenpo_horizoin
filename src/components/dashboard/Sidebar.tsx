@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FcMenu } from "react-icons/fc";
 import { RxCross2 } from "react-icons/rx";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { MdLibraryBooks, MdBook, MdVideoLibrary, MdPeople, MdShoppingCart, MdLogout } from "react-icons/md";
 import { Button } from "../ui/button";
 import { useDispatch } from "react-redux";
@@ -12,11 +12,13 @@ import { removeFromLocalStorage } from "@/utils/local-storage";
 import { authKey } from "@/constants/authkey";
 import { FaVideo } from "react-icons/fa6";
 import { Home } from "lucide-react";
+import { logoutUser } from "@/service/actions/logoutUser";
 
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const dispatech = useDispatch();
+  const router = useRouter();
 
   return (
     <div className="relative  bg-[#2a2c31]">
@@ -126,10 +128,12 @@ const Sidebar = () => {
           <div className="flex gap-4 justify-start items-center">
             <MdLogout size={24} />
             <Button
-              onClick={() => {
+              onClick={async () => {
                 dispatech(removeUser());
                 removeFromLocalStorage(authKey);
-                window.location.href = "/login";
+                await logoutUser(router);
+
+                // window.location.href = "/login";
               }}
               variant={"destructive"}
               className={`flex items-center  space-x-2 p-2 rounded hover:bg-gray-700 hover:text-white hover:border-none w-full font-semibold 
