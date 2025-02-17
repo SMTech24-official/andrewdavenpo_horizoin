@@ -38,8 +38,8 @@ export default function LoginPage() {
   }, [userDataFromApi, dispatch]);
 
   const [formData, setFormData] = useState({
-    email: "admin@gmail.com",
-    password: "hashedpassword123",
+    email: "",
+    password: "",
     rememberMe: false,
   });
   const route = useRouter();
