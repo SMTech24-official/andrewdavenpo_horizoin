@@ -14,6 +14,7 @@ export async function middleware(request: NextRequest) {
 
   // Get the token from cookies
   const accessToken = (await cookies()).get(authKey)?.value;
+  console.log(accessToken);   
 
   // If no token, redirect to sign-in for non-auth routes
   if (!accessToken) {
