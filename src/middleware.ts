@@ -30,6 +30,8 @@ export async function middleware(request: NextRequest) {
   }
   const role: UserRole = decodedData?.role as unknown as UserRole;
 
+  console.log(role);
+
   // Check if the user is trying to access admin routes
   if (AdminRoutes.some((route) => pathname.startsWith(route))) {
     if (role !== UserRole.ADMIN && role !== UserRole.SUPER_ADMIN) {
