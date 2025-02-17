@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { jwtDecode } from "jwt-decode";
+
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { UserRole } from "./types/common";
 import { authKey } from "./constants/authkey";
+import { getUserInfo } from "./utils/getUserInfo";
 
 // Define route groups
 const AuthRoutes = ["/forget-password", "/login", "/signup"];
@@ -27,7 +28,7 @@ export async function middleware(request: NextRequest) {
   // Decode the token to get user details
   let decodedData: { role?: string } | null = null;
   if (accessToken) {
-    decodedData = jwtDecode(accessToken) as any;
+    decodedData = getUserInfo();
   }
   const role: UserRole = decodedData?.role as unknown as UserRole;
 
